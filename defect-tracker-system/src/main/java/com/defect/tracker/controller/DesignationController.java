@@ -50,6 +50,8 @@ public class DesignationController {
             validationFailureResponseCode.getGetAllDesignationSuccessMessage()));
   }
 
+
+
   @GetMapping(value = EndpointURI.DESIGNATION_BY_ID)
   public ResponseEntity<Object> getDesignationById(@PathVariable Long id) {
     if (!designationService.existByDesignation(id)) {

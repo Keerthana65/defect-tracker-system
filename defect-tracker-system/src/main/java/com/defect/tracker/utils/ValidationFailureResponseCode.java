@@ -25,6 +25,12 @@ public class ValidationFailureResponseCode {
   @Value("${code.validation.designation.notExists}")
   private String designationNotExistsCode;
 
+  //validation code for Priority
+  @Value("${code.validation.priority.alreadyExists}")
+  private String priorityAlreadyExists;
+  @Value("${code.validation.priority.notExists}")
+  private String priorityNotExistsCode;
+
   // Messages for Designation
   @Value("${message.success.save.designation}")
   private String saveDesignationSuccessMessage;
@@ -46,4 +52,28 @@ public class ValidationFailureResponseCode {
 
   @Value("${message.success.delete.designation}")
   private String deleteDesignationSuccessMessage;
+
+
+  // Messages for Priority
+  @Value("${message.validation.priority.alreadyExists}")
+  private String validationPriorityAlreadyExists;
+
+  @Value("${message.success.save.priority}")
+  private String savePrioritySuccessMessage;
+
+  @Value("${message.success.getAll.priority}")
+  private String getAllPrioritySuccessMessage;
+
+  @Value("${message.validation.priority.notExists}")
+  private String priorityNotExistsMessage;
+
+  @Value("${message.success.getById.priority}")
+  private String getPriorityByIdSuccessMessage;
+
+  @Value("${message.success.deleteById.priority}")
+  private String deletePrioritySuccessMessage;
+
+  @Value("${message.success.update.priority}")
+  private String updatePrioritySuccessMessage;
+
 }
