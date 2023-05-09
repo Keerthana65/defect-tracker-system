@@ -25,12 +25,6 @@ public class ValidationFailureResponseCode {
   @Value("${code.validation.designation.notExists}")
   private String designationNotExistsCode;
 
-  //validation code for Priority
-  @Value("${code.validation.priority.alreadyExists}")
-  private String priorityAlreadyExists;
-  @Value("${code.validation.priority.notExists}")
-  private String priorityNotExistsCode;
-
   // Messages for Designation
   @Value("${message.success.save.designation}")
   private String saveDesignationSuccessMessage;
@@ -54,6 +48,12 @@ public class ValidationFailureResponseCode {
   private String deleteDesignationSuccessMessage;
 
 
+  //validation code for Priority
+  @Value("${code.validation.priority.alreadyExists}")
+  private String priorityAlreadyExists;
+  @Value("${code.validation.priority.notExists}")
+  private String priorityNotExistsCode;
+
   // Messages for Priority
   @Value("${message.validation.priority.alreadyExists}")
   private String validationPriorityAlreadyExists;
@@ -75,5 +75,29 @@ public class ValidationFailureResponseCode {
 
   @Value("${message.success.update.priority}")
   private String updatePrioritySuccessMessage;
+
+  //validation code for Priority
+  @Value("${code.validation.seviarity.alreadyExists}")
+  private String seviarityAlreadyExists;
+  @Value("${code.validation.priority.notExists}")
+  private String seviarityNotExistsCode;
+
+  // Messages for seviarity
+  @Value("${message.validation.seviarity.alreadyExists}")
+  private String validationSeviarityAlreadyExists;
+
+  @Value("${message.success.save.seviarity}")
+  private String saveSeviaritySuccessMessage;
+
+  @Value("${message.success.getAll.seviarity}")
+  private String getAllSeviaritySuccessMessage;
+
+  @Value("${message.validation.seviarity.notExists}")
+  private String validationSeviarityNotExists;
+  @Value("@{message.success.getById.Seviarity}")
+  private String getSeviaritySuccessMessage;
+
+  @Value("${message.success.deleteById.Seviarity}")
+  private String deleteSeviaritySuccessMessage;
 
 }

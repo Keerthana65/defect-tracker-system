@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PriorityServiceImple implements PriorityService {
+public class PriorityServiceImpl implements PriorityService {
     @Autowired
     private PriorityRepository priorityRepository;
 
