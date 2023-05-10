@@ -19,4 +19,8 @@ public class Constants {
   public static final String DEFECTSTATUS= "defectStatus";
 
   public static final String DEFECTSTATUSES="defectStatuses";
+
+  public static final String PROJECTTSTATUS= "projectStatus";
+
+  public static final String PROJECTSTATUSES="projectStatuses";
 }

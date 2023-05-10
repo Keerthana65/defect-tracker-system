@@ -151,4 +151,26 @@ public class ValidationFailureResponseCode {
   private String getAllDefectStatusSuccessMessage;
   @Value("${message.success.getById.defectStatus}")
   private String getDefectStatusSuccessMessage;
+
+  //validation code for ProjectStatus
+  @Value("${code.validation.projectStatus.alreadyExists}")
+  private String projectStatusAllreadyExists;
+  @Value("${code.validation.projectStatus.notExists}")
+  private String projectStatusNotExists;
+
+  // message for ProjectStatus
+  @Value("${message.validation.projectStatus.alreadyExists}")
+  private String valdiationProjectStatusAllReadyExists;
+  @Value("${message.validation.projectStatus.notExists}")
+  private String validationProjectStatusnotExists;
+  @Value("${message.success.save.projectStatus}")
+  private String saveProjectStatusSuccessMessage;
+  @Value("${message.success.update.projectStatus}")
+  private String updateProjectStatusSuccessMessage;
+  @Value("${message.success.deleteById.projectStatus}")
+  private String deleteProjectStatusSuccessMessage;
+  @Value("${message.success.getAll.projectStatus}")
+  private String getAllProjectStatusSuccessMessage;
+  @Value("${message.success.getById.projectStatus}")
+  private String getProjectStatusSuccessMessage;
 }
