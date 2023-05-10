@@ -1,10 +1,10 @@
 package com.defect.tracker.utils;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import lombok.Getter;
-import lombok.Setter;
 
 @Component
 @PropertySource("classpath:MessagesAndCodes.properties")
@@ -79,7 +79,7 @@ public class ValidationFailureResponseCode {
   //validation code for Priority
   @Value("${code.validation.seviarity.alreadyExists}")
   private String seviarityAlreadyExists;
-  @Value("${code.validation.priority.notExists}")
+  @Value("${code.validation.seviarity.notExists}")
   private String seviarityNotExistsCode;
 
   // Messages for seviarity
@@ -104,4 +104,51 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.update.seviarity}")
   private String updateSeviaritySuccessMessage;
 
+  //validation code for DefectType
+  @Value("${code.validation.defectType.alreadyExists}")
+  private String defectTypeAllreadyExists;
+  @Value("${code.validation.defectType.notExists}")
+  private String defectTypeNotExists;
+
+  // message for defectType
+  @Value("${message.validation.defectType.alreadyExists}")
+  private String valdiationDefectTypeAllReadyExists;
+  @Value("${message.validation.defectType.notExists}")
+  private String validationDefcetTypenotExists;
+  @Value("${message.success.save.defectType}")
+  private String saveDefectTypeSuccessMessage;
+
+  @Value("${message.success.update.defectType}")
+  private String updateDefectTypeSuccessMessage;
+
+  @Value("${message.success.deleteById.defectType}")
+  private String deleteDefectTypeSuccessMessage;
+
+  @Value("${message.success.getAll.defectType}")
+  private String getAllDefectTypeSuccessMessage;
+
+  @Value("${message.success.getById.defectType}")
+  private String getDefectTypeSuccessMessage;
+
+  //validation code for DefectStatus
+  @Value("${code.validation.defectStatus.alreadyExists}")
+  private String defectStatusAllreadyExists;
+  @Value("${code.validation.defectStatus.notExists}")
+  private String defectStatusNotExists;
+
+  // message for defectType
+  @Value("${message.validation.defectStatus.alreadyExists}")
+  private String valdiationDefectStatusAllReadyExists;
+  @Value("${message.validation.defectstatus.notExists}")
+  private String validationDefcetStatusnotExists;
+  @Value("${message.success.save.defectStatus}")
+  private String saveDefectStatusSuccessMessage;
+  @Value("${message.success.update.defectStatus}")
+  private String updateDefectStatusSuccessMessage;
+  @Value("${message.success.deleteById.defectStatus}")
+  private String deleteDefectStatusSuccessMessage;
+  @Value("${message.success.getAll.defectStatus}")
+  private String getAllDefectStatusSuccessMessage;
+  @Value("${message.success.getById.defectStatus}")
+  private String getDefectStatusSuccessMessage;
 }

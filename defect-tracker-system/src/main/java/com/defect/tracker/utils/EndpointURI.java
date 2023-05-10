@@ -14,4 +14,10 @@ public class EndpointURI {
   public static final String SEVIARITY = BASE_API_PATH + "seviarity";
   public static final String SEVIARITY_BY_ID = SEVIARITY + ID;
 
+  public static final String DEFECTTYPE = BASE_API_PATH + "defectType";
+  public static final String DEFECTTYPE_BY_ID = DEFECTTYPE + ID;
+
+  public static final String DEFECTSTATUS = BASE_API_PATH + "defectStatus";
+  public static final String DEFECTSTATUS_BY_ID = DEFECTSTATUS + ID;
+
 }
