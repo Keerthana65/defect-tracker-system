@@ -23,4 +23,12 @@ public class Constants {
   public static final String PROJECTTSTATUS= "projectStatus";
 
   public static final String PROJECTSTATUSES="projectStatuses";
+
+  public static final String RELEASE= "release";
+
+  public static final String RELEASES="releases";
+
+  public static final String ROLE= "role";
+
+  public static final String ROLES="roles";
 }

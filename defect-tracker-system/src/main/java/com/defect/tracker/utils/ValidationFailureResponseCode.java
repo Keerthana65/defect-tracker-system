@@ -173,4 +173,48 @@ public class ValidationFailureResponseCode {
   private String getAllProjectStatusSuccessMessage;
   @Value("${message.success.getById.projectStatus}")
   private String getProjectStatusSuccessMessage;
+
+  //validation code for ProjectStatus
+  @Value("${code.validation.release.alreadyExists}")
+  private String releaseAllreadyExists;
+  @Value("${code.validation.release.notExists}")
+  private String releaseNotExists;
+
+  // message for ProjectStatus
+  @Value("${message.validation.release.alreadyExists}")
+  private String valdiationReleaseAllReadyExists;
+  @Value("${message.validation.release.notExists}")
+  private String validationReleasenotExists;
+  @Value("${message.success.save.release}")
+  private String saveReleaseSuccessMessage;
+  @Value("${message.success.update.release}")
+  private String updateReleaseSuccessMessage;
+  @Value("${message.success.deleteById.release}")
+  private String deleteReleaseSuccessMessage;
+  @Value("${message.success.getAll.release}")
+  private String getAllReleaseSuccessMessage;
+  @Value("${message.success.getById.release}")
+  private String getReleaseSuccessMessage;
+
+  //validation code for ProjectStatus
+  @Value("${code.validation.role.alreadyExists}")
+  private String roleAllreadyExists;
+  @Value("${code.validation.role.notExists}")
+  private String roleNotExists;
+
+  // message for ProjectStatus
+  @Value("${message.validation.role.alreadyExists}")
+  private String valdationRoleAllReadyExists;
+  @Value("${message.validation.role.notExists}")
+  private String validationRolenotExists;
+  @Value("${message.success.save.role}")
+  private String saveRoleSuccessMessage;
+  @Value("${message.success.update.role}")
+  private String updateRoleSuccessMessage;
+  @Value("${message.success.deleteById.role}")
+  private String deleteRoleSuccessMessage;
+  @Value("${message.success.getAll.role}")
+  private String getAllRoleSuccessMessage;
+  @Value("${message.success.getById.role}")
+  private String getRoleSuccessMessage;
 }

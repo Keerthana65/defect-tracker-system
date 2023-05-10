@@ -20,8 +20,14 @@ public class EndpointURI {
   public static final String DEFECTSTATUS = BASE_API_PATH + "defectStatus";
   public static final String DEFECTSTATUS_BY_ID = DEFECTSTATUS + ID;
 
-  public static final String PROJECTSTATUS = BASE_API_PATH + "git ";
+  public static final String PROJECTSTATUS = BASE_API_PATH + "projectstatus ";
   public static final String PROJECTSTATUS_BY_ID = PROJECTSTATUS + ID;
+
+  public static final String RELEASE = BASE_API_PATH + "release ";
+  public static final String RELEASE_BY_ID = RELEASE + ID;
+
+  public static final String ROLE= BASE_API_PATH + "role ";
+  public static final String ROLE_BY_ID = ROLE + ID;
 
 
 }
