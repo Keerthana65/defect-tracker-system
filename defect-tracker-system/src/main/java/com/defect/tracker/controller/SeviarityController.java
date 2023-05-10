@@ -78,5 +78,31 @@ public class SeviarityController {
                 validationFailureResponseCode.getDeleteSeviaritySuccessMessage()));
     }
 
+    @PutMapping(value = EndpointURI.SEVIARITY)
+    public ResponseEntity<Object> updateSeviarity(@RequestBody SeviarityRequest seviarityRequest)
+    {
+     if(!seviarityService.existsByPriority(seviarityRequest.getId()))
+     {
+         return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
+                 validationFailureResponseCode.getSeviarityNotExistsCode(),
+                 validationFailureResponseCode.getValidationSeviarityNotExists()));
+     }
+     if(seviarityService.isUpdateSeviarityExistsByName(seviarityRequest.getName(),seviarityRequest.getId()))
+     {
+         return ResponseEntity.ok((new BaseResponse(RequestStatus.FAILURE.getStatus(),
+                 validationFailureResponseCode.getSeviarityAlreadyExists(),
+                 validationFailureResponseCode.getValidationSeviarityAlreadyExists())));
+     }
+     if(seviarityService.isUpdateSeviarityExistsByColor(seviarityRequest.getColor(),seviarityRequest.getId()))
+     {
+         return ResponseEntity.ok((new BaseResponse(RequestStatus.FAILURE.getStatus(),
+                 validationFailureResponseCode.getSeviarityAlreadyExists(),
+                 validationFailureResponseCode.getValidationSeviarityAlreadyExists())));
+     }
+     seviarityService.saveSeviarity(seviarityRequest);
+     return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
+             validationFailureResponseCode.getUpdateSeviaritySuccessMessage()));
+    }
+
 
 }

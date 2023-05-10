@@ -8,4 +8,8 @@ public interface SeviarityRepository extends JpaRepository<Seviarity,Long> {
     boolean existsByNameIgnoreCase(String name);
 
     boolean existsByColorIgnoreCase(String color);
+
+   boolean existsByNameIgnoreCaseAndIdNot(String name,Long id);
+
+   boolean existsByColorIgnoreCaseAndIdNot(String color,Long id);
 }

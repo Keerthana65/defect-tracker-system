@@ -94,10 +94,14 @@ public class ValidationFailureResponseCode {
 
   @Value("${message.validation.seviarity.notExists}")
   private String validationSeviarityNotExists;
-  @Value("@{message.success.getById.Seviarity}")
+
+  @Value("@{message.success.getById.seviarity}")
   private String getSeviaritySuccessMessage;
 
-  @Value("${message.success.deleteById.Seviarity}")
+  @Value("${message.success.deleteById.seviarity}")
   private String deleteSeviaritySuccessMessage;
+
+  @Value("${message.success.update.seviarity}")
+  private String updateSeviaritySuccessMessage;
 
 }

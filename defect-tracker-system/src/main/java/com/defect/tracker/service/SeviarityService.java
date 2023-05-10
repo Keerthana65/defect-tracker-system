@@ -21,5 +21,8 @@ public interface SeviarityService {
 
     public void deleteSeviarity(Long id);
 
+ public boolean isUpdateSeviarityExistsByName(String name,Long id);
+
+    public boolean isUpdateSeviarityExistsByColor(String color,Long id);
 
 }

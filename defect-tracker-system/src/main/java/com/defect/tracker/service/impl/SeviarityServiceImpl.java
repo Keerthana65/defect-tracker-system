@@ -63,6 +63,16 @@ public class SeviarityServiceImpl implements SeviarityService {
     }
 
     @Override
+    public boolean isUpdateSeviarityExistsByName(String name, Long id) {
+        return seviarityRepository.existsByNameIgnoreCaseAndIdNot(name,id);
+    }
+
+    @Override
+    public boolean isUpdateSeviarityExistsByColor(String color, Long id) {
+        return seviarityRepository.existsByColorIgnoreCaseAndIdNot(color,id);
+    }
+
+    @Override
     public boolean existsByPriority(Long id) {
         return seviarityRepository.existsById(id);
     }
