@@ -31,4 +31,8 @@ public class Constants {
   public static final String ROLE= "role";
 
   public static final String ROLES="roles";
+
+  public static final String EMPLOYEE= "employee";
+
+  public static final String EMPLOYEES="employees";
 }

@@ -217,4 +217,28 @@ public class ValidationFailureResponseCode {
   private String getAllRoleSuccessMessage;
   @Value("${message.success.getById.role}")
   private String getRoleSuccessMessage;
+
+  //validation code for EMployee
+  @Value("${code.validation.employee.notExists}")
+  private String employeeNotExists;
+  @Value("${message.validation.email.alreadyExists}")
+  private String employeeEmailAllReadyExists;
+  @Value("${code.validation.phonenumber.alreadyExists}")
+  private String employeePhoneNumberAllReadyExists;
+  //Message for eMPLOYEE
+  @Value("${message.validation.email.alreadyExists}")
+  private String validationEmployeeEmailAllReadyExists;
+  @Value("${message.validation.phonenumber.alreadyExists}")
+  private String validationEmployeePhoneNumberAllReadyExists;
+  @Value("${message.validation.employee.notExists}")
+  private String validationEmployeeNotExists;
+  @Value("${message.success.save.employee}")
+  private String saveEmployeeSuccessMessage;
+  @Value("${message.success.getAll.employee}")
+  private String getAllEmployeeSUccessMessage;
+  @Value("${message.success.getById.employee}")
+  private String getEmployeeByIdSuccessMessage;
+  @Value("${message.success.deleteById.employee}")
+  private String deleteEMployeeSuccessMessage;
+
 }
