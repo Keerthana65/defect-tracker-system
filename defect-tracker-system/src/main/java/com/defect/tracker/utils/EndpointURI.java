@@ -32,5 +32,11 @@ public class EndpointURI {
   public static final String EMPLOYEE= BASE_API_PATH + "employee";
   public static final String EMPLOYEE_BY_ID = EMPLOYEE + ID;
 
+  public static final String PROJECT= BASE_API_PATH + "project";
+  public static final String PROJECT_BY_ID = PROJECT + ID;
+
+  public static final String PROJECTALLOCATION= BASE_API_PATH + "projectallocation";
+  public static final String PROJECTALLOCATION_BY_ID = PROJECTALLOCATION + ID;
+
 
 }

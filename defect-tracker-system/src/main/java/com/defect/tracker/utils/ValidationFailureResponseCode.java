@@ -241,4 +241,44 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.deleteById.employee}")
   private String deleteEMployeeSuccessMessage;
 
+  //validation code for PRoject
+  @Value("${code.validation.name.allreadyexists}")
+  private String projectNameAllReadyExists;
+  @Value("${code.validation.project.allreadyexists}")
+  private String projectAllreadyExists;
+  @Value("${code.validation.project.notexists}")
+  private String projectNotExists;
+  //message for project
+  @Value("${message.validation.name.allreadyexists}")
+  private String projectNameAllreadyExistsMessage;
+  @Value("${message.validation.project.allreadyexists}")
+  private String projectAllreadyExistsMessage;
+  @Value("${message.validation.project.notexists}")
+  private String projectNotExistsMessage;
+  @Value("${message.success.save.project}")
+  private String saveProjectSuccessMessage;
+  @Value("${message.success.update.project}")
+  private String updateProjectSuccessMessage;
+  @Value("${message.success.getAll.project}")
+  private String getAllProjectSuccessMessage;
+  @Value("${message.success.getById.project}")
+  private String getProjectSuccessMessage;
+  @Value("${message.success.delete.project}")
+  private String deleteProjectSuccessMessage;
+  //validation code for PRojectAllocation
+  @Value("${code.validation.projectallocation.notexists}")
+  private String projectallocationNotExists;
+  //message for projectAllocation
+  @Value("${message.success.save.projectallocation}")
+  private String saveProjectAllocationSuccessMessage;
+  @Value("${message.validation.projectallocation.notexists}")
+  private String projectallocationNotExistsMessage;
+  @Value("${message.success.update.projectallocation}")
+  private String updateProjectAllocationSuccessMessage;
+  @Value("${message.success.getAll.projectallocation}")
+  private String getAllProjectAllocationSuccessMessage;
+  @Value("${message.success.getById.projectallocation}")
+  private String getProjectAllocationSuccessMessage;
+  @Value("${message.success.delete.projectallocation}")
+  private String deleteProjectAllocationSuccessMessage;
 }
