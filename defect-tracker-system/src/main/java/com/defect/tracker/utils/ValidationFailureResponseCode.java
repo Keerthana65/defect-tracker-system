@@ -299,7 +299,7 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.save.defect}")
   private String saveDefectSuccessMessage;
   @Value("${message.success.update.defect}")
-  private String updateDefctSucessMessage;
+  private String updateDefectSucessMessage;
   @Value("${message.success.delete.defect}")
   private String deleteDefctSuccessMessage;
   @Value("${message.success.getALl.defect}")

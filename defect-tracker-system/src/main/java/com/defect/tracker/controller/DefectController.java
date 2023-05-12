@@ -152,7 +152,7 @@ public class DefectController {
         defectService.saveDefect(defectRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveDefectSuccessMessage()));
+                validationFailureResponseCode.getUpdateDefectSucessMessage()));
     }
     @GetMapping(EndpointURI.DEFECT)
     public ResponseEntity<Object> getAllDefect()
