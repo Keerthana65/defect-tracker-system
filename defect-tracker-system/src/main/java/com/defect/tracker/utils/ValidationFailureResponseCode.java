@@ -281,4 +281,30 @@ public class ValidationFailureResponseCode {
   private String getProjectAllocationSuccessMessage;
   @Value("${message.success.delete.projectallocation}")
   private String deleteProjectAllocationSuccessMessage;
+  //validationcode for Defect
+  @Value("${code.validation.defect.nameALreadyexits}")
+    private String nameAllReadyExists;
+  @Value("${code.validation.defect.notExists}")
+  private String defectNotExists;
+  @Value("${code.validation.defect.ALreadyexits}")
+  private String defectAllRedyExists;
+  //validation message for defcet
+  @Value("${message.validation.defect.nameALreadyexits}")
+  private String nameAllRedyExistsMessage;
+  @Value("${message.validation.defect.ALreadyexits}")
+  private String defectAllRedyExistsMessage;
+  @Value("${message.validation.defect.notExists}")
+  private String defectNotExitsMessage;
+
+  @Value("${message.success.save.defect}")
+  private String saveDefectSuccessMessage;
+  @Value("${message.success.update.defect}")
+  private String updateDefctSucessMessage;
+  @Value("${message.success.delete.defect}")
+  private String deleteDefctSuccessMessage;
+  @Value("${message.success.getALl.defect}")
+  private String getAllDefectSuccessMessage;
+  @Value("${message.success.getById.defect}")
+  private String getDefctSuccessMessage;
+
 }

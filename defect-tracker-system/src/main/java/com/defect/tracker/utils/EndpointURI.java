@@ -11,6 +11,9 @@ public class EndpointURI {
   public static final String PRIORITY = BASE_API_PATH + "priority";
   public static final String PRIORITY_BY_ID = PRIORITY + ID;
 
+  public static final String DEFECT = BASE_API_PATH + "defect";
+  public static final String DEFECT_BY_ID = DEFECT + ID;
+
   public static final String SEVIARITY = BASE_API_PATH + "seviarity";
   public static final String SEVIARITY_BY_ID = SEVIARITY + ID;
 

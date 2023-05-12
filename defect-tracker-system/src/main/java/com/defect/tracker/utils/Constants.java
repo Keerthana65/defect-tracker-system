@@ -43,4 +43,8 @@ public class Constants {
   public static final String PROJECTALLOCATION= "projectAllocation";
 
   public static final String PROJECTALLOCATIONS="projectsALlocations";
+
+  public static final String DEFECT= "defect";
+
+  public static final String DEFECTS="defects";
 }
