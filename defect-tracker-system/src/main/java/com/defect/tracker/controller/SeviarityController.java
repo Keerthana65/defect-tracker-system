@@ -2,13 +2,19 @@ package com.defect.tracker.controller;
 
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.resquest.dto.SeviarityRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
+import com.defect.tracker.search.dto.PrioritySearch;
+import com.defect.tracker.search.dto.SeviaritySearch;
 import com.defect.tracker.service.SeviarityService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,6 +108,18 @@ public class SeviarityController {
      seviarityService.saveSeviarity(seviarityRequest);
      return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
              validationFailureResponseCode.getUpdateSeviaritySuccessMessage()));
+    }
+    @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_SEVIARITY)
+    public ResponseEntity<Object> multiSearchSeviarity(@RequestParam(name="page") int page,
+                                                        @RequestParam(name="size") int size,
+                                                        @RequestParam(name="direction") String direction,
+                                                        @RequestParam(name="sortField") String sortField, SeviaritySearch seviaritySearch)
+    {
+        Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
+        PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
+        return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.SEVIARITIES,seviarityService.multiSearch(pageable,pagination,seviaritySearch),
+                RequestStatus.SUCCESS.getStatus(),validationFailureResponseCode.getCommonSuccessCode(),
+                validationFailureResponseCode.getSearchAndPaginationSeviaritySuccessMessage(),pagination));
     }
 
 

@@ -109,7 +109,8 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.update.seviarity}")
   private String updateSeviaritySuccessMessage;
 
-
+  @Value("${message.success.searchAndPagination.seviarity}")
+  private String searchAndPaginationSeviaritySuccessMessage;
 
   //validation code for DefectType
   @Value("${code.validation.defectType.alreadyExists}")

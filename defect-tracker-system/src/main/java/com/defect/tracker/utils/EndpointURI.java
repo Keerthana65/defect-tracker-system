@@ -24,6 +24,7 @@ public class EndpointURI {
 
   public static final String SEVIARITY = BASE_API_PATH + "seviarity";
   public static final String SEVIARITY_BY_ID = SEVIARITY + ID;
+  public static final String SEARCH_AND_PAGINATION_SEVIARITY=SEVIARITY+"/search";
 
   public static final String DEFECTTYPE = BASE_API_PATH + "defectType";
   public static final String DEFECTTYPE_BY_ID = DEFECTTYPE + ID;
