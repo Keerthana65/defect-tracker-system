@@ -138,6 +138,9 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.getById.defectType}")
   private String getDefectTypeSuccessMessage;
 
+  @Value("${message.success.searchAndPagination.defectType}")
+  private String searchAndPaginationDefectTypeSuccessMessage;
+
   //validation code for DefectStatus
   @Value("${code.validation.defectStatus.alreadyExists}")
   private String defectStatusAllreadyExists;
@@ -159,6 +162,8 @@ public class ValidationFailureResponseCode {
   private String getAllDefectStatusSuccessMessage;
   @Value("${message.success.getById.defectStatus}")
   private String getDefectStatusSuccessMessage;
+  @Value("${message.success.searchAndPagination.defectStatus}")
+  private String searchAndPaginationDefectStatusSuccessMessage;
 
   //validation code for ProjectStatus
   @Value("${code.validation.projectStatus.alreadyExists}")

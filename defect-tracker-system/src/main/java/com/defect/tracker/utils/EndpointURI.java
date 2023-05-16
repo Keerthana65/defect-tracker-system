@@ -29,8 +29,12 @@ public class EndpointURI {
   public static final String DEFECTTYPE = BASE_API_PATH + "defectType";
   public static final String DEFECTTYPE_BY_ID = DEFECTTYPE + ID;
 
+  public static final String SEARCH_AND_PAGINATION_DEFECTTYPE = DEFECTTYPE+"/search";
+
   public static final String DEFECTSTATUS = BASE_API_PATH + "defectStatus";
   public static final String DEFECTSTATUS_BY_ID = DEFECTSTATUS + ID;
+
+  public static final String SEARCH_AND_PAGINATION_DEFECTSTATUS = DEFECTSTATUS+"/search";
 
   public static final String PROJECTSTATUS = BASE_API_PATH + "projectstatus";
   public static final String PROJECTSTATUS_BY_ID = PROJECTSTATUS + ID;
