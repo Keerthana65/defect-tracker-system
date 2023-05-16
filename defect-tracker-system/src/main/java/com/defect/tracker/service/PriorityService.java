@@ -28,7 +28,7 @@ public interface PriorityService {
     public void deletePriority(Long id);
 
 
-   public List<PriorityResponse> getPriorityPagination(Integer pageSize, Integer pageNumber, String sortPRoperty);
+  // public List<PriorityResponse> getPriorityPagination(Integer pageSize, Integer pageNumber, String sortPRoperty);
 
 
     List<PriorityResponse> multiSearchpriority(Pageable pageable, PaginatedContentResponse.Pagination pagination, PrioritySearch prioritySearch);

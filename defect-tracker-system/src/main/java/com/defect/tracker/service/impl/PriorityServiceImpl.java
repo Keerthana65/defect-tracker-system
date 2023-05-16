@@ -85,25 +85,25 @@ public class PriorityServiceImpl implements PriorityService {
         priorityRepository.deleteById(id);
     }
 
-    @Override
-    public List<PriorityResponse> getPriorityPagination(Integer pageSize, Integer pageNumber, String sortPRoperty) {
-        Pageable pageable = null;
-        if (sortPRoperty == null) {
-            pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "name");
-
-        } else {
-            pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, sortPRoperty);
-        }
-        List<PriorityResponse> priorityResponses = new ArrayList<>();
-        Page<Priority> priorities = priorityRepository.findAll(pageable);
-        for (Priority priority : priorities
-        ) {
-            PriorityResponse priorityResponse = new PriorityResponse();
-            BeanUtils.copyProperties(priority, priorityResponse);
-            priorityResponses.add(priorityResponse);
-        }
-        return priorityResponses;
-    }
+//    @Override
+//    public List<PriorityResponse> getPriorityPagination(Integer pageSize, Integer pageNumber, String sortPRoperty) {
+//        Pageable pageable = null;
+//        if (sortPRoperty == null) {
+//            pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "name");
+//
+//        } else {
+//            pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, sortPRoperty);
+//        }
+//        List<PriorityResponse> priorityResponses = new ArrayList<>();
+//        Page<Priority> priorities = priorityRepository.findAll(pageable);
+//        for (Priority priority : priorities
+//        ) {
+//            PriorityResponse priorityResponse = new PriorityResponse();
+//            BeanUtils.copyProperties(priority, priorityResponse);
+//            priorityResponses.add(priorityResponse);
+//        }
+//        return priorityResponses;
+//    }
 
     @Override
     public List<PriorityResponse> multiSearchpriority(Pageable pageable, PaginatedContentResponse.Pagination pagination, PrioritySearch prioritySearch) {
