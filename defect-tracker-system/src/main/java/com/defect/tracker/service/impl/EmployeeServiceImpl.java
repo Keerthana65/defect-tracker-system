@@ -8,6 +8,10 @@ import com.defect.tracker.resquest.dto.EmployeeRequest;
 import com.defect.tracker.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,6 +72,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Page<Employee> getEmployeePagination(Integer pageNumber, Integer pageSize, String sortproperty) {
+        Pageable pageable=null;
+        if(sortproperty==null)
+        {
+            pageable=PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC,"name");
+        }
+        else {
+            pageable=PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC,sortproperty);
+        }
+        return employeeRepository.findAll(pageable);
+    }
+    @Override
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
@@ -81,5 +97,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean isUpdateEmployeePhonenumbeAlreadyExists(Long phoneNumber, Long id) {
         return employeeRepository.existsByPhoneNumberAndIdNot(phoneNumber,id);
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.defect.tracker.controller;
 
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
+import com.defect.tracker.entities.Employee;
 import com.defect.tracker.resquest.dto.EmployeeRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
 import com.defect.tracker.service.DesignationService;
@@ -11,6 +12,7 @@ import com.defect.tracker.utils.EndpointURI;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.aspectj.apache.bcel.classfile.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -108,5 +110,16 @@ public class EmployeeController {
         return ResponseEntity.ok(new BaseResponse(
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getDeleteEMployeeSuccessMessage()));
+    }
+//    @RequestMapping(value = "/paginationSorting/{pageNumber}/{pageSize}/{sortPropertity}",method =RequestMethod.GET)
+//    public Page<Employee> employeePagination(@PathVariable Integer pageNumber,@PathVariable Integer pageSize,@PathVariable String sortproperty)
+//    {
+//        return employeeService.getEmployeePagination(pageNumber,pageSize,sortproperty);
+//    }
+    @GetMapping(EndpointURI.paginationAndSorting)
+    public ResponseEntity<Object> employeePagination(@PathVariable Integer pageNumber,@PathVariable Integer pageSize,@PathVariable String sortproperty)
+    {
+        return ResponseEntity.ok(new ContentResponse<>(Constants.SEARCHES,employeeService.getEmployeePagination(pageNumber,pageSize,sortproperty),RequestStatus.SUCCESS.getStatus(),
+                validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getGetEmployeePainationSuccessMessage()));
     }
 }

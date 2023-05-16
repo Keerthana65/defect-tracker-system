@@ -76,6 +76,11 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.update.priority}")
   private String updatePrioritySuccessMessage;
 
+  @Value("${message.success.searchAndPagination.priority}")
+  private String searchAndAPginationPRioritySuccessMessage;
+
+
+
   //validation code for Priority
   @Value("${code.validation.seviarity.alreadyExists}")
   private String seviarityAlreadyExists;
@@ -103,6 +108,8 @@ public class ValidationFailureResponseCode {
 
   @Value("${message.success.update.seviarity}")
   private String updateSeviaritySuccessMessage;
+
+
 
   //validation code for DefectType
   @Value("${code.validation.defectType.alreadyExists}")
@@ -240,6 +247,8 @@ public class ValidationFailureResponseCode {
   private String getEmployeeByIdSuccessMessage;
   @Value("${message.success.deleteById.employee}")
   private String deleteEMployeeSuccessMessage;
+  @Value("${message.success.getPagination.Employee}")
+  private String getEmployeePainationSuccessMessage;
 
   //validation code for PRoject
   @Value("${code.validation.name.allreadyexists}")
@@ -306,5 +315,7 @@ public class ValidationFailureResponseCode {
   private String getAllDefectSuccessMessage;
   @Value("${message.success.getById.defect}")
   private String getDefctSuccessMessage;
+
+
 
 }

@@ -2,8 +2,9 @@ package com.defect.tracker.repositories;
 
 import com.defect.tracker.entities.Priority;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
-public interface PriorityRepository extends JpaRepository<Priority,Long> {
+public interface PriorityRepository extends JpaRepository<Priority,Long> , QuerydslPredicateExecutor<Priority> {
 
     boolean existsByNameIgnoreCase(String name);
 

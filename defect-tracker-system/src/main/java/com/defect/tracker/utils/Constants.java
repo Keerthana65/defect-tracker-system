@@ -47,4 +47,7 @@ public class Constants {
   public static final String DEFECT= "defect";
 
   public static final String DEFECTS="defects";
+  public static final String SEARCH= "search";
+
+  public static final String SEARCHES="searches";
 }

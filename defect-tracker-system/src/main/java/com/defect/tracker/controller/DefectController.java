@@ -35,53 +35,44 @@ public class DefectController {
     private ValidationFailureResponseCode validationFailureResponseCode;
 
     @PostMapping(EndpointURI.DEFECT)
-    public ResponseEntity<Object> saveDefect(@RequestBody DefectRequest defectRequest)
-    {
-        if(defectService.existsByName(defectRequest.getName()))
-        {
+    public ResponseEntity<Object> saveDefect(@RequestBody DefectRequest defectRequest) {
+        if (defectService.existsByName(defectRequest.getName())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
-                    validationFailureResponseCode.getNameAllReadyExists(),validationFailureResponseCode.getNameAllRedyExistsMessage()));
+                    validationFailureResponseCode.getNameAllReadyExists(), validationFailureResponseCode.getNameAllRedyExistsMessage()));
         }
-        if(!projectService.existsById(defectRequest.getProjectId()))
-        {
+        if (!projectService.existsById(defectRequest.getProjectId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getProjectNotExists(),
                     validationFailureResponseCode.getProjectNotExistsMessage()
-                    ));
+            ));
 
         }
-        if(!priorityService.existsByPriority(defectRequest.getPriorityId()))
-        {
+        if (!priorityService.existsByPriority(defectRequest.getPriorityId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityNotExistsCode(),
                     validationFailureResponseCode.getPriorityNotExistsMessage()));
         }
-        if(!seviarityService.existsByPriority(defectRequest.getSeviarityId()))
-        {
+        if (!seviarityService.existsByPriority(defectRequest.getSeviarityId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getSeviarityNotExistsCode(),
                     validationFailureResponseCode.getValidationSeviarityNotExists()));
         }
-        if(!defectStatusService.existByDefectStatus(defectRequest.getDefectStatusId()))
-        {
+        if (!defectStatusService.existByDefectStatus(defectRequest.getDefectStatusId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getDefectStatusNotExists(),
                     validationFailureResponseCode.getValidationDefcetStatusnotExists()));
         }
-        if(!defectTypeService.existsByDefectType(defectRequest.getDefectTypeId()))
-        {
+        if (!defectTypeService.existsByDefectType(defectRequest.getDefectTypeId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getDefectTypeNotExists(),
                     validationFailureResponseCode.getValidationDefcetTypenotExists()));
         }
-        if(!employeeService.existsById(defectRequest.getReportId()))
-        {
+        if (!employeeService.existsById(defectRequest.getReportId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
         }
-        if(!employeeService.existsById(defectRequest.getAssigToId()))
-        {
+        if (!employeeService.existsById(defectRequest.getAssigToId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
@@ -91,60 +82,51 @@ public class DefectController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveDefectSuccessMessage()));
     }
+
     @PutMapping(EndpointURI.DEFECT)
-    public ResponseEntity<Object> updateDefect(@RequestBody DefectRequest defectRequest)
-    {
-        if(!defectService.existById(defectRequest.getId()))
-        {
+    public ResponseEntity<Object> updateDefect(@RequestBody DefectRequest defectRequest) {
+        if (!defectService.existById(defectRequest.getId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
-                    validationFailureResponseCode.getDefectNotExists(),validationFailureResponseCode.getDefectNotExitsMessage()));
+                    validationFailureResponseCode.getDefectNotExists(), validationFailureResponseCode.getDefectNotExitsMessage()));
         }
-        if(defectService.existsByNameIgnoreCaseAndIdNot(defectRequest.getName(),defectRequest.getId()))
-        {
+        if (defectService.existsByNameIgnoreCaseAndIdNot(defectRequest.getName(), defectRequest.getId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getNameAllReadyExists(),
                     validationFailureResponseCode.getNameAllRedyExistsMessage()));
         }
-        if(!projectService.existsById(defectRequest.getProjectId()))
-        {
+        if (!projectService.existsById(defectRequest.getProjectId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getProjectNotExists(),
                     validationFailureResponseCode.getProjectNotExistsMessage()
             ));
 
         }
-        if(!priorityService.existsByPriority(defectRequest.getPriorityId()))
-        {
+        if (!priorityService.existsByPriority(defectRequest.getPriorityId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityNotExistsCode(),
                     validationFailureResponseCode.getPriorityNotExistsMessage()));
         }
-        if(!seviarityService.existsByPriority(defectRequest.getSeviarityId()))
-        {
+        if (!seviarityService.existsByPriority(defectRequest.getSeviarityId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getSeviarityNotExistsCode(),
                     validationFailureResponseCode.getValidationSeviarityNotExists()));
         }
-        if(!defectStatusService.existByDefectStatus(defectRequest.getDefectStatusId()))
-        {
+        if (!defectStatusService.existByDefectStatus(defectRequest.getDefectStatusId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getDefectStatusNotExists(),
                     validationFailureResponseCode.getValidationDefcetStatusnotExists()));
         }
-        if(!defectTypeService.existsByDefectType(defectRequest.getDefectTypeId()))
-        {
+        if (!defectTypeService.existsByDefectType(defectRequest.getDefectTypeId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getDefectTypeNotExists(),
                     validationFailureResponseCode.getValidationDefcetTypenotExists()));
         }
-        if(!employeeService.existsById(defectRequest.getReportId()))
-        {
+        if (!employeeService.existsById(defectRequest.getReportId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
         }
-        if(!employeeService.existsById(defectRequest.getAssigToId()))
-        {
+        if (!employeeService.existsById(defectRequest.getAssigToId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
@@ -154,32 +136,30 @@ public class DefectController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getUpdateDefectSucessMessage()));
     }
+
     @GetMapping(EndpointURI.DEFECT)
-    public ResponseEntity<Object> getAllDefect()
-    {
-        return ResponseEntity.ok(new ContentResponse<>(Constants.DEFECTS,defectService.getllDefect(),RequestStatus.SUCCESS.getStatus(),
+    public ResponseEntity<Object> getAllDefect() {
+        return ResponseEntity.ok(new ContentResponse<>(Constants.DEFECTS, defectService.getllDefect(), RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllDefectSuccessMessage()));
     }
+
     @GetMapping(EndpointURI.DEFECT_BY_ID)
-    public ResponseEntity<Object> getDefectById(@PathVariable Long id)
-    {
-        if(!defectService.existById(id))
-        {
+    public ResponseEntity<Object> getDefectById(@PathVariable Long id) {
+        if (!defectService.existById(id)) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
-                    validationFailureResponseCode.getDefectNotExists(),validationFailureResponseCode.getDefectNotExitsMessage()));
+                    validationFailureResponseCode.getDefectNotExists(), validationFailureResponseCode.getDefectNotExitsMessage()));
         }
-        return ResponseEntity.ok(new ContentResponse<>(Constants.DEFECT,defectService.getDefectById(id),RequestStatus.SUCCESS.getStatus(),
+        return ResponseEntity.ok(new ContentResponse<>(Constants.DEFECT, defectService.getDefectById(id), RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetDefctSuccessMessage()));
     }
+
     @DeleteMapping(EndpointURI.DEFECT_BY_ID)
-    public ResponseEntity<Object> deleteDefectById(@PathVariable Long id)
-    {
-        if(!defectService.existById(id))
-        {
+    public ResponseEntity<Object> deleteDefectById(@PathVariable Long id) {
+        if (!defectService.existById(id)) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
-                    validationFailureResponseCode.getDefectNotExists(),validationFailureResponseCode.getDefectNotExitsMessage()));
+                    validationFailureResponseCode.getDefectNotExists(), validationFailureResponseCode.getDefectNotExitsMessage()));
         }
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),

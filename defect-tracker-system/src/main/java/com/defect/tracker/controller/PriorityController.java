@@ -2,15 +2,22 @@ package com.defect.tracker.controller;
 
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.resquest.dto.PriorityRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
+import com.defect.tracker.search.dto.PrioritySearch;
 import com.defect.tracker.service.PriorityService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @CrossOrigin
@@ -29,8 +36,7 @@ public class PriorityController {
                     validationFailureResponseCode.getPriorityAlreadyExists(),
                     validationFailureResponseCode.getValidationPriorityAlreadyExists()));
         }
-        if(priorityService.isPriorityExistsByColor(priorityRequest.getColor()))
-        {
+        if (priorityService.isPriorityExistsByColor(priorityRequest.getColor())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityAlreadyExists(),
                     validationFailureResponseCode.getValidationPriorityAlreadyExists()));
@@ -42,46 +48,39 @@ public class PriorityController {
     }
 
     @GetMapping(value = EndpointURI.PRIORITY)
-    public ResponseEntity<Object> getAllPriority()
-    {
-        return ResponseEntity.ok(new ContentResponse<>(Constants.PRIORITIES,priorityService.getAllPriority(),
-                RequestStatus.SUCCESS.getStatus(),validationFailureResponseCode.getCommonSuccessCode(),
+    public ResponseEntity<Object> getAllPriority() {
+        return ResponseEntity.ok(new ContentResponse<>(Constants.PRIORITIES, priorityService.getAllPriority(),
+                RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllPrioritySuccessMessage()));
     }
 
     @GetMapping(value = EndpointURI.PRIORITY_BY_ID)
-    public ResponseEntity<Object> getPriorityById(@PathVariable Long id)
-    {
-        if(!priorityService.existsByPriority(id))
-        {
+    public ResponseEntity<Object> getPriorityById(@PathVariable Long id) {
+        if (!priorityService.existsByPriority(id)) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityNotExistsCode(),
                     validationFailureResponseCode.getPriorityNotExistsMessage()));
         }
 
-        return ResponseEntity.ok(new ContentResponse<>(Constants.PRIORITY,priorityService.getPriorityById(id),
+        return ResponseEntity.ok(new ContentResponse<>(Constants.PRIORITY, priorityService.getPriorityById(id),
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllPrioritySuccessMessage()));
 
     }
 
     @PutMapping(value = EndpointURI.PRIORITY)
-    public ResponseEntity<Object> updatePriority(@RequestBody PriorityRequest priorityRequest)
-    {
-        if(!priorityService.existsByPriority(priorityRequest.getId()))
-        {
+    public ResponseEntity<Object> updatePriority(@RequestBody PriorityRequest priorityRequest) {
+        if (!priorityService.existsByPriority(priorityRequest.getId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityNotExistsCode(),
                     validationFailureResponseCode.getPriorityNotExistsMessage()));
         }
-        if(priorityService.isUpdatePriorityNameExists(priorityRequest.getName(),priorityRequest.getId()))
-        {
+        if (priorityService.isUpdatePriorityNameExists(priorityRequest.getName(), priorityRequest.getId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityAlreadyExists(),
                     validationFailureResponseCode.getValidationPriorityAlreadyExists()));
         }
-        if(priorityService.isUpdatePriorityColorExists(priorityRequest.getColor(),priorityRequest.getId()))
-        {
+        if (priorityService.isUpdatePriorityColorExists(priorityRequest.getColor(), priorityRequest.getId())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityAlreadyExists(),
                     validationFailureResponseCode.getValidationPriorityAlreadyExists()));
@@ -93,10 +92,8 @@ public class PriorityController {
     }
 
     @DeleteMapping(value = EndpointURI.PRIORITY_BY_ID)
-    public ResponseEntity<Object> deletePriority(@PathVariable Long id)
-    {
-        if(!priorityService.existsByPriority(id))
-        {
+    public ResponseEntity<Object> deletePriority(@PathVariable Long id) {
+        if (!priorityService.existsByPriority(id)) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getPriorityNotExistsCode(),
                     validationFailureResponseCode.getPriorityNotExistsMessage()));
@@ -107,5 +104,26 @@ public class PriorityController {
                 validationFailureResponseCode.getDeletePrioritySuccessMessage()));
     }
 
-
+//    @GetMapping(EndpointURI.PRIORITYPAGINATION)
+//    public ResponseEntity<Object> getPaginationAndSortingEmployee(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam String sortPRoperty) {
+//        return ResponseEntity.ok(new ContentResponse<>(Constants.SEARCHES, priorityService.getPriorityPagination(pageSize, pageNumber, sortPRoperty),
+//                RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
+//                validationFailureResponseCode.getGetPriorityPainationSuccessMessage()));
+//    }
+    @GetMapping(EndpointURI.PRIORITYPAGINATION)
+    public ResponseEntity<Object> multiSearchPriority(@RequestParam(name = "page") int page,
+                                                      @RequestParam(name = "size") int size,
+                                                      @RequestParam(name = "direction") String direction,
+                                                      @RequestParam(name = "sortField") String sortField,
+                                                      PrioritySearch prioritySearch)
+    {
+        Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
+        PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
+       return  ResponseEntity.ok(new PaginatedContentResponse<>(Constants.SEARCHES,
+               priorityService.multiSearchpriority(pageable,pagination,prioritySearch),
+               RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
+               validationFailureResponseCode.getSearchAndAPginationPRioritySuccessMessage(),pagination));
+    }
 }
+
+//

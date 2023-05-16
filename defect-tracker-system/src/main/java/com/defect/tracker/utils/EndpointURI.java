@@ -4,13 +4,21 @@ public class EndpointURI {
   private static final String BASE_API_PATH = "/api/v1/";
   private static final String ID = "/{id}";
 
+  private static final String FEILD = "/{feild}";
+  private static final String pageSize="/{pageSize}";
+
+  private static final String pageNumber="/{pageNumber}";
+
+  private static final String sortProperty="/{sortProperty}";
+
   // URLs for Designation
   public static final String DESIGNATION = BASE_API_PATH + "designation";
   public static final String DESIGNATION_BY_ID = DESIGNATION + ID;
 
   public static final String PRIORITY = BASE_API_PATH + "priority";
   public static final String PRIORITY_BY_ID = PRIORITY + ID;
-
+  public static final String PRIORITYPAGINATION=PRIORITY+"/search";
+  public static final String PRIORITYSEARCH= BASE_API_PATH + "priority"+FEILD;
   public static final String DEFECT = BASE_API_PATH + "defect";
   public static final String DEFECT_BY_ID = DEFECT + ID;
 
@@ -40,6 +48,8 @@ public class EndpointURI {
 
   public static final String PROJECTALLOCATION= BASE_API_PATH + "projectallocation";
   public static final String PROJECTALLOCATION_BY_ID = PROJECTALLOCATION + ID;
+
+  public static final String paginationAndSorting=BASE_API_PATH+pageNumber+pageSize+sortProperty;
 
 
 }
