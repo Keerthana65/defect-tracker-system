@@ -1,18 +1,22 @@
 package com.defect.tracker.service.impl;
 
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.Employee;
 import com.defect.tracker.entities.Project;
 import com.defect.tracker.entities.ProjectAllocation;
+import com.defect.tracker.entities.QProjectAllocation;
 import com.defect.tracker.entities.Role;
 import com.defect.tracker.repositories.ProjectAllocationRepository;
 import com.defect.tracker.response.dto.ProjectAllocationResponse;
-import com.defect.tracker.response.dto.ProjectResponse;
 import com.defect.tracker.resquest.dto.ProjectAllocationRequest;
-import com.defect.tracker.resquest.dto.ProjectRequest;
+import com.defect.tracker.search.dto.ProjectAllocationSearch;
 import com.defect.tracker.service.ProjectAllocationService;
-import com.defect.tracker.service.ProjectService;
+import com.defect.tracker.utils.Utils;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,6 +77,44 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
     public void deletePRojectAllocation(Long id) {
         projectAllocationRepository.deleteById(id);
     }
+
+    @Override
+    public List<ProjectAllocationResponse> multiSearchProjectAllocation(Pageable pageable,
+                                                                        PaginatedContentResponse.Pagination pagination,
+                                                                        ProjectAllocationSearch projectAllocationSearch) {
+       BooleanBuilder booleanBuilder=new BooleanBuilder();
+        if(Utils.isNotNullAndEmpty(projectAllocationSearch.getProjectName()))
+        {
+            booleanBuilder.and(QProjectAllocation.projectAllocation.project.name.eq(projectAllocationSearch.getProjectName()));
+        }
+        if(Utils.isNotNullAndEmpty(projectAllocationSearch.getRoleName()))
+        {
+            booleanBuilder.and(QProjectAllocation.projectAllocation.role.name.eq(projectAllocationSearch.getRoleName()));
+        }
+        if(Utils.isNotNullAndEmpty(projectAllocationSearch.getEmployeeName()))
+        {
+            booleanBuilder.and(QProjectAllocation.projectAllocation.employee.firName.eq(projectAllocationSearch.getEmployeeName()));
+        }
+
+        List<ProjectAllocationResponse> projectAllocationResponses=new ArrayList<>();
+        Page<ProjectAllocation> projectAllocationPage=projectAllocationRepository.findAll(booleanBuilder,pageable);
+        pagination.setTotalRecords(projectAllocationPage.getTotalElements());
+        pagination.setTotalPages(projectAllocationPage.getTotalPages());
+        for (ProjectAllocation projectAllocation:projectAllocationPage
+        ) {
+            ProjectAllocationResponse projectAllocationResponse=new ProjectAllocationResponse();
+            projectAllocationResponse.setProjectName(projectAllocation.getProject().getName());
+            projectAllocationResponse.setEmployeeName(projectAllocation.getEmployee().getFirName());
+            projectAllocationResponse.setRoleName(projectAllocation.getRole().getName());
+            BeanUtils.copyProperties(projectAllocation,projectAllocationResponse);
+            projectAllocationResponses.add(projectAllocationResponse);
+        }
+        return projectAllocationResponses;
+
+    }
+
+
+
     @Override
     public boolean existsById(Long id)
     {

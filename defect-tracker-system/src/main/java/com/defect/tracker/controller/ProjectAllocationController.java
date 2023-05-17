@@ -2,9 +2,11 @@ package com.defect.tracker.controller;
 
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.ProjectAllocation;
 import com.defect.tracker.resquest.dto.ProjectAllocationRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
+import com.defect.tracker.search.dto.ProjectAllocationSearch;
 import com.defect.tracker.service.EmployeeService;
 import com.defect.tracker.service.ProjectAllocationService;
 import com.defect.tracker.service.ProjectService;
@@ -13,6 +15,9 @@ import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,6 +118,19 @@ public class ProjectAllocationController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetProjectAllocationSuccessMessage()));
     }
+    @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_PROJECTALLOCATION)
+    public ResponseEntity<Object> multiSearchProjectAllocation(@RequestParam(name="page") int page,
+                                                               @RequestParam(name="size") int size,
+                                                               @RequestParam(name="direction") String direction,
+                                                               @RequestParam(name="sortField") String sortField,
+                                                               ProjectAllocationSearch projectAllocationSearch)
+    {
+        Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
+        PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
+        return  ResponseEntity.ok(new PaginatedContentResponse<>(Constants.PROJECTALLOCATIONS,projectAllocationService.multiSearchProjectAllocation(pageable,pagination,projectAllocationSearch),
+                RequestStatus.SUCCESS.getStatus(),validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationProjectAllocationSuccessMessage(),pagination));
+    }
+
     @DeleteMapping(EndpointURI.PROJECTALLOCATION_BY_ID)
     public ResponseEntity<Object> deleteProjectAllocation(@PathVariable Long id)
     {

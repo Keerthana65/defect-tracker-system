@@ -190,6 +190,9 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.getById.projectStatus}")
   private String getProjectStatusSuccessMessage;
 
+  @Value("${message.success.searchAndPagination.projectStatus}")
+  private String searchAndAPginationProjectStatusSuccessMessage;
+
   //validation code for ProjectStatus
   @Value("${code.validation.release.alreadyExists}")
   private String releaseAllreadyExists;
@@ -305,6 +308,11 @@ public class ValidationFailureResponseCode {
   private String getProjectAllocationSuccessMessage;
   @Value("${message.success.delete.projectallocation}")
   private String deleteProjectAllocationSuccessMessage;
+  @Value("${message.success.searchAndPagination.project}")
+  private String searchAndPaginationProjectSuccessMessage;
+
+  @Value("${message.success.searchAndPagination.projectallocation}")
+  private String searchAndPaginationProjectAllocationSuccessMessage;
   //validationcode for Defect
   @Value("${code.validation.defect.nameALreadyexits}")
     private String nameAllReadyExists;

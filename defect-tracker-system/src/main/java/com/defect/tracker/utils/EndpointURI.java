@@ -39,6 +39,7 @@ public class EndpointURI {
 
   public static final String PROJECTSTATUS = BASE_API_PATH + "projectstatus";
   public static final String PROJECTSTATUS_BY_ID = PROJECTSTATUS + ID;
+  public static final String SEARCH_AND_PAGINATION_PROJECTSTATUS=PROJECTSTATUS+"/search";
 
   public static final String RELEASE = BASE_API_PATH + "release";
   public static final String RELEASE_BY_ID = RELEASE + ID;
@@ -54,9 +55,11 @@ public class EndpointURI {
 
   public static final String PROJECT= BASE_API_PATH + "project";
   public static final String PROJECT_BY_ID = PROJECT + ID;
+  public  static final String SEARCH_AND_PAGINATION_PROJECT = PROJECT+"/search";
 
   public static final String PROJECTALLOCATION= BASE_API_PATH + "projectallocation";
   public static final String PROJECTALLOCATION_BY_ID = PROJECTALLOCATION + ID;
+  public static final String SEARCH_AND_PAGINATION_PROJECTALLOCATION = PROJECTALLOCATION+"/search";
 
   public static final String paginationAndSorting=BASE_API_PATH+pageNumber+pageSize+sortProperty;
 

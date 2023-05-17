@@ -1,16 +1,25 @@
 package com.defect.tracker.service.impl;
 
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.Project;
+import com.defect.tracker.entities.QProject;
 import com.defect.tracker.entities.ProjectStatus;
 import com.defect.tracker.repositories.ProjectRepository;
 import com.defect.tracker.response.dto.ProjectResponse;
 import com.defect.tracker.resquest.dto.ProjectRequest;
+import com.defect.tracker.search.dto.ProjectSearch;
 import com.defect.tracker.service.ProjectService;
+import com.defect.tracker.utils.Utils;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -69,5 +78,48 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProject(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProjectResponse> multiSearchProject(Pageable pageable, PaginatedContentResponse.Pagination pagination, ProjectSearch projectSearch) {
+        BooleanBuilder booleanBuilder=new BooleanBuilder();
+        if(Utils.isNotNullAndEmpty(projectSearch.getProjectStatusName()))
+        {
+            booleanBuilder.and(QProject.project.projectStatus.name.eq(projectSearch.getProjectStatusName()));
+        }
+        if(Utils.isNotNullAndEmpty(projectSearch.getContactNumber()))
+        {
+            booleanBuilder.and(QProject.project.contactNumber.eq(Long.parseLong(projectSearch.getProjectStatusName())));
+        }
+        if(Utils.isNotNullAndEmpty(projectSearch.getContactPerson()))
+        {
+            booleanBuilder.and(QProject.project.contactPerson.eq(projectSearch.getContactPerson()));
+        }
+        if(Utils.isNotNullAndEmpty(projectSearch.getName()))
+        {
+            booleanBuilder.and(QProject.project.name.eq(projectSearch.getName()));
+        }
+        if(Utils.isNotNullAndEmpty(projectSearch.getEndDate()))
+        {
+            booleanBuilder.and(QProject.project.endDate.eq(Long.parseLong(projectSearch.getEndDate())));
+        }
+        if(Utils.isNotNullAndEmpty(projectSearch.getStartDate()))
+        {
+            booleanBuilder.and(QProject.project.startDate.eq((projectSearch.getStartDate())));
+        }
+
+
+        List<ProjectResponse> projectResponses=new ArrayList<>();
+        Page<Project> projectPage=projectRepository.findAll(booleanBuilder,pageable);
+        pagination.setTotalRecords(projectPage.getTotalElements());
+        pagination.setTotalPages(projectPage.getTotalPages());
+        for (Project project:projectPage
+        ) {
+            ProjectResponse projectResponse=new ProjectResponse();
+            projectResponse.setProjectStatusName(project.getProjectStatus().getName());
+            BeanUtils.copyProperties(project,projectResponse);
+            projectResponses.add(projectResponse);
+        }
+        return projectResponses;
     }
 }
