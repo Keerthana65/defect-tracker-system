@@ -9,8 +9,6 @@ import java.util.Date;
 @Setter
 public class ProjectSearch {
     private String name;
-    private String startDate;
-    private  String endDate;
     private String contactNumber;
     private String contactPerson;
     private String projectStatusName;

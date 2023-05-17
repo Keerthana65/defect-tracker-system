@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class ProjectAllocationSearch {
     private String projectName;
-    private String employeeName;
+    private String employeeFirName;
     private String roleName;
 }

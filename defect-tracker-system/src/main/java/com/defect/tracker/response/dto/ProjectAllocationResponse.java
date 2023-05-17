@@ -8,6 +8,6 @@ import lombok.Setter;
 public class ProjectAllocationResponse {
     private Long id;
     private String projectName;
-    private String employeeName;
+    private String employeeFirName;
     private String roleName;
 }

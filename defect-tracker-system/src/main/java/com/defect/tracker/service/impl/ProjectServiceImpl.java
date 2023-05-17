@@ -89,7 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         if(Utils.isNotNullAndEmpty(projectSearch.getContactNumber()))
         {
-            booleanBuilder.and(QProject.project.contactNumber.eq(Long.parseLong(projectSearch.getProjectStatusName())));
+            booleanBuilder.and(QProject.project.contactNumber.eq(Long.parseLong(projectSearch.getContactNumber())));
         }
         if(Utils.isNotNullAndEmpty(projectSearch.getContactPerson()))
         {
@@ -99,15 +99,6 @@ public class ProjectServiceImpl implements ProjectService {
         {
             booleanBuilder.and(QProject.project.name.eq(projectSearch.getName()));
         }
-        if(Utils.isNotNullAndEmpty(projectSearch.getEndDate()))
-        {
-            booleanBuilder.and(QProject.project.endDate.eq(Long.parseLong(projectSearch.getEndDate())));
-        }
-        if(Utils.isNotNullAndEmpty(projectSearch.getStartDate()))
-        {
-            booleanBuilder.and(QProject.project.startDate.eq((projectSearch.getStartDate())));
-        }
-
 
         List<ProjectResponse> projectResponses=new ArrayList<>();
         Page<Project> projectPage=projectRepository.findAll(booleanBuilder,pageable);

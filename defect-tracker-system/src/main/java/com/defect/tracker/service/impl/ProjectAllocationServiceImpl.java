@@ -54,7 +54,7 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
              ) {
             ProjectAllocationResponse projectAllocationResponse=new ProjectAllocationResponse();
             projectAllocationResponse.setProjectName(projectAllocation.getProject().getName());
-            projectAllocationResponse.setEmployeeName(projectAllocation.getEmployee().getFirName());
+            projectAllocationResponse.setEmployeeFirName(projectAllocation.getEmployee().getFirName());
             projectAllocationResponse.setRoleName(projectAllocation.getRole().getName());
             BeanUtils.copyProperties(projectAllocation,projectAllocationResponse);
             projectAllocationResponses.add(projectAllocationResponse);
@@ -67,7 +67,7 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
         ProjectAllocationResponse projectAllocationResponse=new ProjectAllocationResponse();
         ProjectAllocation projectAllocation=projectAllocationRepository.findById(id).get();
         projectAllocationResponse.setProjectName(projectAllocation.getProject().getName());
-        projectAllocationResponse.setEmployeeName(projectAllocation.getEmployee().getFirName());
+        projectAllocationResponse.setEmployeeFirName(projectAllocation.getEmployee().getFirName());
         projectAllocationResponse.setRoleName(projectAllocation.getRole().getName());
         BeanUtils.copyProperties(projectAllocation,projectAllocationResponse);
         return projectAllocationResponse;
@@ -91,9 +91,9 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
         {
             booleanBuilder.and(QProjectAllocation.projectAllocation.role.name.eq(projectAllocationSearch.getRoleName()));
         }
-        if(Utils.isNotNullAndEmpty(projectAllocationSearch.getEmployeeName()))
+        if(Utils.isNotNullAndEmpty(projectAllocationSearch.getEmployeeFirName()))
         {
-            booleanBuilder.and(QProjectAllocation.projectAllocation.employee.firName.eq(projectAllocationSearch.getEmployeeName()));
+            booleanBuilder.and(QProjectAllocation.projectAllocation.employee.firName.eq(projectAllocationSearch.getEmployeeFirName()));
         }
 
         List<ProjectAllocationResponse> projectAllocationResponses=new ArrayList<>();
@@ -104,7 +104,7 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
         ) {
             ProjectAllocationResponse projectAllocationResponse=new ProjectAllocationResponse();
             projectAllocationResponse.setProjectName(projectAllocation.getProject().getName());
-            projectAllocationResponse.setEmployeeName(projectAllocation.getEmployee().getFirName());
+            projectAllocationResponse.setEmployeeFirName(projectAllocation.getEmployee().getFirName());
             projectAllocationResponse.setRoleName(projectAllocation.getRole().getName());
             BeanUtils.copyProperties(projectAllocation,projectAllocationResponse);
             projectAllocationResponses.add(projectAllocationResponse);
