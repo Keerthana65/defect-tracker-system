@@ -236,6 +236,8 @@ public class ValidationFailureResponseCode {
   private String getAllRoleSuccessMessage;
   @Value("${message.success.getById.role}")
   private String getRoleSuccessMessage;
+  @Value("${message.success.searchAndPagination.role}")
+  private String searchAndPaginationRoleSuccessMessage;
 
   //validation code for EMployee
   @Value("${code.validation.employee.notExists}")

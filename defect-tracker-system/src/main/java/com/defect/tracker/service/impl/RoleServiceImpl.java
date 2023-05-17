@@ -88,11 +88,11 @@ public class RoleServiceImpl implements RoleService {
             pagination.setTotalPages(rolePage.getTotalPages());
             for (Role role:rolePage
             ) {
-                ReleaseResponse releaseResponse=new ReleaseResponse();
+                RoleResponse roleResponse=new RoleResponse();
                 BeanUtils.copyProperties(role,roleResponse);
                 roleResponseList.add(roleResponse);
             }
             return roleResponseList;
         }
     }
-}
+

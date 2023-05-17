@@ -46,6 +46,7 @@ public class EndpointURI {
 
   public static final String ROLE= BASE_API_PATH + "role";
   public static final String ROLE_BY_ID = ROLE + ID;
+  public static final String SEARCH_AND_PAGINATION_ROLE=ROLE+"/search";
 
   public static final String EMPLOYEE= BASE_API_PATH + "employee";
   public static final String EMPLOYEE_BY_ID = EMPLOYEE + ID;
