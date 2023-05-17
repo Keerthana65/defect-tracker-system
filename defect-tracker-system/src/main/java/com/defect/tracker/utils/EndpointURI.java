@@ -14,6 +14,7 @@ public class EndpointURI {
   // URLs for Designation
   public static final String DESIGNATION = BASE_API_PATH + "designation";
   public static final String DESIGNATION_BY_ID = DESIGNATION + ID;
+  public static final String SEARCH_AND_PAGINATION_DESIGNATION=DESIGNATION+"/search";
 
   public static final String PRIORITY = BASE_API_PATH + "priority";
   public static final String PRIORITY_BY_ID = PRIORITY + ID;
@@ -21,7 +22,7 @@ public class EndpointURI {
   public static final String PRIORITYSEARCH= BASE_API_PATH + "priority"+FEILD;
   public static final String DEFECT = BASE_API_PATH + "defect";
   public static final String DEFECT_BY_ID = DEFECT + ID;
-
+  public static final String SEARCH_AND_PAGINATION_DEFECT=DEFECT+"/search";
   public static final String SEVIARITY = BASE_API_PATH + "seviarity";
   public static final String SEVIARITY_BY_ID = SEVIARITY + ID;
   public static final String SEARCH_AND_PAGINATION_SEVIARITY=SEVIARITY+"/search";
@@ -41,12 +42,14 @@ public class EndpointURI {
 
   public static final String RELEASE = BASE_API_PATH + "release";
   public static final String RELEASE_BY_ID = RELEASE + ID;
+  public static final String SEARCH_AND_PAGINATION_RELEASE=RELEASE+"/search";
 
   public static final String ROLE= BASE_API_PATH + "role";
   public static final String ROLE_BY_ID = ROLE + ID;
 
   public static final String EMPLOYEE= BASE_API_PATH + "employee";
   public static final String EMPLOYEE_BY_ID = EMPLOYEE + ID;
+  public static final String SEARCH_AND_PAGINATION_EMPLOYEE = EMPLOYEE+"/search";
 
   public static final String PROJECT= BASE_API_PATH + "project";
   public static final String PROJECT_BY_ID = PROJECT + ID;

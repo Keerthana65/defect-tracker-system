@@ -47,6 +47,9 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.delete.designation}")
   private String deleteDesignationSuccessMessage;
 
+  @Value("${message.success.searchAndPagination.designation}")
+  private String searchAndPaginationDesignationSuccessMessage;
+
 
   //validation code for Priority
   @Value("${code.validation.priority.alreadyExists}")
@@ -208,6 +211,9 @@ public class ValidationFailureResponseCode {
   private String getAllReleaseSuccessMessage;
   @Value("${message.success.getById.release}")
   private String getReleaseSuccessMessage;
+  @Value("${message.success.searchAndPagination.release}")
+  private String searchAndPaginationReleaseSuccessMessage;
+
 
   //validation code for ProjectStatus
   @Value("${code.validation.role.alreadyExists}")
@@ -255,7 +261,8 @@ public class ValidationFailureResponseCode {
   private String deleteEMployeeSuccessMessage;
   @Value("${message.success.getPagination.Employee}")
   private String getEmployeePainationSuccessMessage;
-
+  @Value("${message.success.searchANdPagination.Employee}")
+  private String searchAndPaginationEmployeeSuccessMessage;
   //validation code for PRoject
   @Value("${code.validation.name.allreadyexists}")
   private String projectNameAllReadyExists;
@@ -321,6 +328,8 @@ public class ValidationFailureResponseCode {
   private String getAllDefectSuccessMessage;
   @Value("${message.success.getById.defect}")
   private String getDefctSuccessMessage;
+  @Value("${message.success.searchAndPagination.defect}")
+  private String searchAndPaginationDefectnSuccessMessage;
 
 
 

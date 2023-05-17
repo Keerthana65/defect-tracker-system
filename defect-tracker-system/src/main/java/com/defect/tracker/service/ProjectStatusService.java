@@ -1,7 +1,12 @@
 package com.defect.tracker.service;
 
+import com.defect.tracker.common.response.PaginatedContentResponse;
+import com.defect.tracker.response.dto.DesignationResponse;
 import com.defect.tracker.response.dto.ProjectStatusResponse;
 import com.defect.tracker.resquest.dto.ProjectStatusRequest;
+import com.defect.tracker.search.dto.DesiginationSearch;
+import com.defect.tracker.search.dto.ProjectStatusSearch;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,4 +24,6 @@ public interface ProjectStatusService {
     public boolean isUpdatedProjectStatusNameExist(Long id, String name);
 
     public void deleteProjectStatus(Long id);
+
+    public List<ProjectStatusResponse> multiSearchProjectStatusSearch(Pageable pageable, PaginatedContentResponse.Pagination pagination, ProjectStatusSearch projectStatusSearch);
 }

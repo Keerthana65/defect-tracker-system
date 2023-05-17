@@ -1,14 +1,19 @@
 package com.defect.tracker.service.impl;
 
-import com.defect.tracker.entities.Designation;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.Release;
+import com.defect.tracker.entities.QRelease;
 import com.defect.tracker.repositories.ReleaseRepository;
-import com.defect.tracker.response.dto.DesignationResponse;
 import com.defect.tracker.response.dto.ReleaseResponse;
 import com.defect.tracker.resquest.dto.ReleaseRequest;
+import com.defect.tracker.search.dto.ReleaseSearch;
 import com.defect.tracker.service.ReleaseService;
+import com.defect.tracker.utils.Utils;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -64,5 +69,25 @@ public class ReleaseServiceImpl implements ReleaseService {
     public void deleteRelease(Long id) {
         releaseRepository.deleteById(id);
 
+    }
+
+    @Override
+    public List<ReleaseResponse> multiSearchRealese(Pageable pageable, PaginatedContentResponse.Pagination pagination, ReleaseSearch releaseSearch) {
+        BooleanBuilder booleanBuilder=new BooleanBuilder();
+        if(Utils.isNotNullAndEmpty(releaseSearch.getReleaseName()))
+        {
+            booleanBuilder.and(QRelease.release.name.eq(releaseSearch.getReleaseName()));
+        }
+        List<ReleaseResponse> releaseResponseList=new ArrayList<>();
+        Page<Release> releasePage=releaseRepository.findAll(booleanBuilder,pageable);
+        pagination.setTotalRecords(releasePage.getTotalElements());
+        pagination.setTotalPages(releasePage.getTotalPages());
+        for (Release release:releasePage
+        ) {
+            ReleaseResponse releaseResponse=new ReleaseResponse();
+            BeanUtils.copyProperties(release,releaseResponse);
+            releaseResponseList.add(releaseResponse);
+        }
+        return releaseResponseList;
     }
 }

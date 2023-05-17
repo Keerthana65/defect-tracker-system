@@ -2,13 +2,19 @@ package com.defect.tracker.controller;
 
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.resquest.dto.DefectRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
+import com.defect.tracker.search.dto.DefectSearch;
+import com.defect.tracker.search.dto.DesiginationSearch;
 import com.defect.tracker.service.*;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -166,4 +172,16 @@ public class DefectController {
                 validationFailureResponseCode.getDeleteDefctSuccessMessage()));
     }
 
+    @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_DEFECT)
+    public ResponseEntity<Object> multiSearchDefectType(@RequestParam(name="page") int page,
+                                                        @RequestParam(name="size") int size,
+                                                        @RequestParam(name="direction") String direction,
+                                                        @RequestParam(name="sortField") String sortField,
+                                                        DefectSearch defectSearch)
+    {
+        Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
+        PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
+        return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.DEFECTS,defectService.multiSearchDefect(pageable,pagination,defectSearch),
+                RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationDefectnSuccessMessage(),pagination));
+    }
 }

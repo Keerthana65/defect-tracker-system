@@ -1,15 +1,14 @@
 package com.defect.tracker.controller;
 
+import com.defect.tracker.common.response.PaginatedContentResponse;
+import com.defect.tracker.search.dto.DefectTypeSearch;
+import com.defect.tracker.search.dto.DesiginationSearch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.defect.tracker.common.response.BaseResponse;
 import com.defect.tracker.common.response.ContentResponse;
 import com.defect.tracker.resquest.dto.DesignationRequest;
@@ -83,6 +82,18 @@ public class DesignationController {
     return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
         validationFailureResponseCode.getCommonSuccessCode(),
         validationFailureResponseCode.getUpdateDesignationSuccessMessage()));
+  }
+  @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_DESIGNATION)
+  public ResponseEntity<Object> multiSearchDefectType(@RequestParam(name="page") int page,
+                                                      @RequestParam(name="size") int size,
+                                                      @RequestParam(name="direction") String direction,
+                                                      @RequestParam(name="sortField") String sortField,
+                                                      DesiginationSearch desiginationSearch)
+  {
+    Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
+    PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
+    return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.DESIGNATIONS,designationService.multiSearchDesignationSearch(pageable,pagination,desiginationSearch),
+            RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationDesignationSuccessMessage(),pagination));
   }
 
   @DeleteMapping(value = EndpointURI.DESIGNATION_BY_ID)

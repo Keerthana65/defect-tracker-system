@@ -1,16 +1,24 @@
 package com.defect.tracker.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.Designation;
+import com.defect.tracker.entities.QDesignation;
 import com.defect.tracker.repositories.DesignationRepository;
 import com.defect.tracker.response.dto.DesignationResponse;
 import com.defect.tracker.resquest.dto.DesignationRequest;
+import com.defect.tracker.search.dto.DesiginationSearch;
 import com.defect.tracker.service.DesignationService;
+import com.defect.tracker.utils.Utils;
+import com.querydsl.core.BooleanBuilder;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DesignationServiceImpl implements DesignationService {
@@ -62,5 +70,26 @@ public class DesignationServiceImpl implements DesignationService {
   @Override
   public void deleteDesignation(Long id) {
     designationRepository.deleteById(id);
+  }
+
+
+  @Override
+  public List<DesignationResponse> multiSearchDesignationSearch(Pageable pageable, PaginatedContentResponse.Pagination pagination, DesiginationSearch desiginationSearch) {
+    BooleanBuilder booleanBuilder=new BooleanBuilder();
+    if(Utils.isNotNullAndEmpty(desiginationSearch.getDesignationName()))
+    {
+      booleanBuilder.and(QDesignation.designation.name.eq(desiginationSearch.getDesignationName()));
+    }
+    List<DesignationResponse> designationResponseList=new ArrayList<>();
+    Page<Designation> designationPage=designationRepository.findAll(booleanBuilder,pageable);
+    pagination.setTotalRecords(designationPage.getTotalElements());
+    pagination.setTotalPages(designationPage.getTotalPages());
+    for (Designation designation:designationPage
+    ) {
+      DesignationResponse designationResponse=new DesignationResponse();
+      BeanUtils.copyProperties(designation,designationResponse);
+      designationResponseList.add(designationResponse);
+    }
+    return designationResponseList;
   }
 }
