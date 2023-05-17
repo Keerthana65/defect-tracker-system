@@ -2,8 +2,8 @@ package com.defect.tracker.service.impl;
 
 import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.entities.Project;
-import com.defect.tracker.entities.QProject;
 import com.defect.tracker.entities.ProjectStatus;
+import com.defect.tracker.entities.QProject;
 import com.defect.tracker.repositories.ProjectRepository;
 import com.defect.tracker.response.dto.ProjectResponse;
 import com.defect.tracker.resquest.dto.ProjectRequest;
@@ -14,12 +14,10 @@ import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
