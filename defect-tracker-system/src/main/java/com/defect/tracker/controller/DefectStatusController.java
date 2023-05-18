@@ -54,7 +54,7 @@ public class DefectStatusController {
         defectStatusService.saveDefectStatus(defecetStatusRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveDefectStatusSuccessMessage()));
+                validationFailureResponseCode.getUpdateDefectStatusSuccessMessage()));
 
     }
 

@@ -1,11 +1,11 @@
-package com.defect.tracker.resquest.dto;
+package com.defect.tracker.response.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SeviarityRequest {
+public class SeverityResponse {
     private Long id;
     private String name;
     private String color;

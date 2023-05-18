@@ -6,7 +6,6 @@ import com.defect.tracker.common.response.PaginatedContentResponse;
 import com.defect.tracker.resquest.dto.DefectRequest;
 import com.defect.tracker.rest.enums.RequestStatus;
 import com.defect.tracker.search.dto.DefectSearch;
-import com.defect.tracker.search.dto.DesiginationSearch;
 import com.defect.tracker.service.*;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
@@ -28,7 +27,7 @@ public class DefectController {
     @Autowired
     private PriorityService priorityService;
     @Autowired
-    private SeviarityService seviarityService;
+    private SeverityService seviarityService;
     @Autowired
     private DefectStatusService defectStatusService;
     @Autowired
@@ -83,6 +82,12 @@ public class DefectController {
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
         }
+        if(!releaseService.existByRelease(defectRequest.getReleaseId()))
+        {
+            return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
+                    validationFailureResponseCode.getReleaseNotExists(),
+                    validationFailureResponseCode.getValidationReleasenotExists()));
+        }
         defectService.saveDefect(defectRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
@@ -136,6 +141,12 @@ public class DefectController {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getEmployeeNotExists(),
                     validationFailureResponseCode.getValidationEmployeeNotExists()));
+        }
+        if(!releaseService.existByRelease(defectRequest.getReleaseId()))
+        {
+            return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
+                    validationFailureResponseCode.getReleaseNotExists(),
+                    validationFailureResponseCode.getValidationReleasenotExists()));
         }
         defectService.saveDefect(defectRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),

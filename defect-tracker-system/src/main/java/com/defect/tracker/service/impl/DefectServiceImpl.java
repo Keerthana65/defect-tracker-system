@@ -8,7 +8,6 @@ import com.defect.tracker.response.dto.DefectResponse;
 import com.defect.tracker.resquest.dto.DefectRequest;
 import com.defect.tracker.search.dto.DefectSearch;
 import com.defect.tracker.service.DefectService;
-import com.defect.tracker.service.EmployeeService;
 import com.defect.tracker.utils.Utils;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
@@ -35,7 +34,7 @@ public class DefectServiceImpl implements DefectService {
         priority.setId(defectRequest.getPriorityId());
         defect.setPriority(priority);
 
-        Seviarity seviarity=new Seviarity();
+        Severity seviarity=new Severity();
         seviarity.setId(defectRequest.getSeviarityId());
         defect.setSeviarity(seviarity);
 

@@ -56,6 +56,7 @@ public class ProjectAllocationServiceImpl implements ProjectAllocationService {
             projectAllocationResponse.setProjectName(projectAllocation.getProject().getName());
             projectAllocationResponse.setEmployeeFirName(projectAllocation.getEmployee().getFirName());
             projectAllocationResponse.setRoleName(projectAllocation.getRole().getName());
+            projectAllocationResponse.setEmployeeFirName(projectAllocation.getEmployee().getFirName());
             BeanUtils.copyProperties(projectAllocation,projectAllocationResponse);
             projectAllocationResponses.add(projectAllocationResponse);
         }

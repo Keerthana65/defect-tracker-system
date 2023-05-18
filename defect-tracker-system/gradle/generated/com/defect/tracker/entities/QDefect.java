@@ -42,7 +42,7 @@ public class QDefect extends EntityPathBase<Defect> {
 
     public final QEmployee reporter;
 
-    public final QSeviarity seviarity;
+    public final QSeverity seviarity;
 
     public final StringPath stepToRecreat = createString("stepToRecreat");
 
@@ -71,7 +71,7 @@ public class QDefect extends EntityPathBase<Defect> {
         this.project = inits.isInitialized("project") ? new QProject(forProperty("project"), inits.get("project")) : null;
         this.release = inits.isInitialized("release") ? new QRelease(forProperty("release")) : null;
         this.reporter = inits.isInitialized("reporter") ? new QEmployee(forProperty("reporter"), inits.get("reporter")) : null;
-        this.seviarity = inits.isInitialized("seviarity") ? new QSeviarity(forProperty("seviarity")) : null;
+        this.seviarity = inits.isInitialized("seviarity") ? new QSeverity(forProperty("seviarity")) : null;
     }
 
 }

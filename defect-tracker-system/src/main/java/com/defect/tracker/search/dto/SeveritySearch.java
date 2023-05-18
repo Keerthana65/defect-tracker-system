@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SeviaritySearch {
+public class SeveritySearch {
     private String seviarityName;
     private String seviarityColor;
 }

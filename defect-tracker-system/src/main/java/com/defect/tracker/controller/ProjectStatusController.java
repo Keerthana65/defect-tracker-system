@@ -101,6 +101,7 @@ public class ProjectStatusController {
                     validationFailureResponseCode.getProjectStatusNotExists(),
                     validationFailureResponseCode.getValidationProjectStatusnotExists()));
         }
+        projectStatusService.deleteProjectStatus(id);
         return ResponseEntity.ok(new BaseResponse(
                 RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),

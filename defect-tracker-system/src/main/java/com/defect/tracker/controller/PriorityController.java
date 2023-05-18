@@ -104,12 +104,7 @@ public class PriorityController {
                 validationFailureResponseCode.getDeletePrioritySuccessMessage()));
     }
 
-//    @GetMapping(EndpointURI.PRIORITYPAGINATION)
-//    public ResponseEntity<Object> getPaginationAndSortingEmployee(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam String sortPRoperty) {
-//        return ResponseEntity.ok(new ContentResponse<>(Constants.SEARCHES, priorityService.getPriorityPagination(pageSize, pageNumber, sortPRoperty),
-//                RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
-//                validationFailureResponseCode.getGetPriorityPainationSuccessMessage()));
-//    }
+
     @GetMapping(EndpointURI.PRIORITYPAGINATION)
     public ResponseEntity<Object> multiSearchPriority(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size,

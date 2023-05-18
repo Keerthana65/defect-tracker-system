@@ -38,7 +38,7 @@ public class RoleController {
         roleService.saveRole(roleRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveReleaseSuccessMessage()));
+                validationFailureResponseCode.getSaveRoleSuccessMessage()));
     }
 
     @PutMapping(EndpointURI.ROLE)
@@ -49,8 +49,8 @@ public class RoleController {
                     validationFailureResponseCode.getValidationRolenotExists()));
 
         }
-        if (roleService.isUpdatedRoleNameExist(roleRequest.getId(), roleRequest.getName())) {
-            return ResponseEntity.ok(new BaseResponse((RequestStatus.FAILURE.getStatus()),
+        if (roleService.isRoleExists(roleRequest.getName())) {
+            return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getRoleAllreadyExists(),
                     validationFailureResponseCode.getValdationRoleAllReadyExists()));
         }

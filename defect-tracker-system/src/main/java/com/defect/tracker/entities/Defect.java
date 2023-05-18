@@ -1,6 +1,5 @@
 package com.defect.tracker.entities;
 
-import jdk.jfr.Enabled;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +23,7 @@ public class Defect {
     private Priority priority;
     @ManyToOne
     @JoinColumn(name = "seviarity_id",nullable = false)
-    private Seviarity seviarity;
+    private Severity seviarity;
     @ManyToOne
     @JoinColumn(name = "defect_type_id",nullable = false)
     private DefectType defectType;

@@ -49,7 +49,7 @@ public class ProjectController {
         projectService.saveProject(projectRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveEmployeeSuccessMessage()));
+                validationFailureResponseCode.getSaveProjectSuccessMessage()));
     }
 
     @PutMapping(EndpointURI.PROJECT)
@@ -61,7 +61,7 @@ public class ProjectController {
                     validationFailureResponseCode.getProjectNotExists(),
                     validationFailureResponseCode.getProjectNotExistsMessage()));
         }
-        if(!projectService.existsByProjectNameAndIdNot(projectRequest.getName(),projectRequest.getId()))
+        if(projectService.existsByProjectNameAndIdNot(projectRequest.getName(),projectRequest.getId()))
         {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getProjectNameAllReadyExists(),
@@ -77,7 +77,7 @@ public class ProjectController {
         projectService.saveProject(projectRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveEmployeeSuccessMessage()));
+                validationFailureResponseCode.getUpdateProjectSuccessMessage()));
     }
     @GetMapping(EndpointURI.PROJECT)
     public ResponseEntity<Object> getALlProject()

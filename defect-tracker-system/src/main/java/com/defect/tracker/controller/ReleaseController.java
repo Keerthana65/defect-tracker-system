@@ -32,7 +32,7 @@ public class ReleaseController {
         if (releaseService.isReleaseExists(releaseRequest.getName())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getReleaseAllreadyExists(),
-                    validationFailureResponseCode.getValidationReleasenotExists()));
+                    validationFailureResponseCode.getValdiationReleaseAllReadyExists()));
         }
         releaseService.saveRelease(releaseRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
@@ -49,13 +49,13 @@ public class ReleaseController {
         }
         if (releaseService.isUpdatedReleaseNameExist(releaseRequest.getId(), releaseRequest.getName())) {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
-                    validationFailureResponseCode.getProjectStatusAllreadyExists(),
-                    validationFailureResponseCode.getValidationRolenotExists()));
+                    validationFailureResponseCode.getReleaseAllreadyExists(),
+                    validationFailureResponseCode.getValdiationReleaseAllReadyExists()));
         }
         releaseService.saveRelease(releaseRequest);
         return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(),
-                validationFailureResponseCode.getSaveReleaseSuccessMessage()));
+                validationFailureResponseCode.getUpdateReleaseSuccessMessage()));
     }
 
     @GetMapping(EndpointURI.RELEASE)

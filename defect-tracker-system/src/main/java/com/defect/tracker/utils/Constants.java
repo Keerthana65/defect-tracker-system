@@ -8,9 +8,9 @@ public class Constants {
 
   public static final String PRIORITIES="priorities";
 
-  public static final String SEVIARITY = "seviarity";
+  public static final String SEVERITY = "severity";
 
-  public static final String SEVIARITIES="seviarities";
+  public static final String SEVERITIES="severities";
 
   public static final String DEFECTTYPE= "defectType";
 

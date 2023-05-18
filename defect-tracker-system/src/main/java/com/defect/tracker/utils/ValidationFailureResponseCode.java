@@ -85,25 +85,25 @@ public class ValidationFailureResponseCode {
 
 
   //validation code for Priority
-  @Value("${code.validation.seviarity.alreadyExists}")
+  @Value("${code.validation.severity.alreadyExists}")
   private String seviarityAlreadyExists;
-  @Value("${code.validation.seviarity.notExists}")
+  @Value("${code.validation.severity.notExists}")
   private String seviarityNotExistsCode;
 
-  // Messages for seviarity
-  @Value("${message.validation.seviarity.alreadyExists}")
-  private String validationSeviarityAlreadyExists;
+  // Messages for severity
+  @Value("${message.validation.defectType.alreadyExists}")
+  private String validationSeverityAlreadyExists;
 
-  @Value("${message.success.save.seviarity}")
+  @Value("${message.success.save.severity}")
   private String saveSeviaritySuccessMessage;
 
-  @Value("${message.success.getAll.seviarity}")
+  @Value("${message.success.getAll.severity}")
   private String getAllSeviaritySuccessMessage;
 
   @Value("${message.validation.seviarity.notExists}")
   private String validationSeviarityNotExists;
 
-  @Value("@{message.success.getById.seviarity}")
+  @Value("${message.success.getById.seviarity}")
   private String getSeviaritySuccessMessage;
 
   @Value("${message.success.deleteById.seviarity}")
@@ -193,13 +193,13 @@ public class ValidationFailureResponseCode {
   @Value("${message.success.searchAndPagination.projectStatus}")
   private String searchAndAPginationProjectStatusSuccessMessage;
 
-  //validation code for ProjectStatus
+  //validation code for Release
   @Value("${code.validation.release.alreadyExists}")
   private String releaseAllreadyExists;
   @Value("${code.validation.release.notExists}")
   private String releaseNotExists;
 
-  // message for ProjectStatus
+  // message for Release
   @Value("${message.validation.release.alreadyExists}")
   private String valdiationReleaseAllReadyExists;
   @Value("${message.validation.release.notExists}")
@@ -218,13 +218,13 @@ public class ValidationFailureResponseCode {
   private String searchAndPaginationReleaseSuccessMessage;
 
 
-  //validation code for ProjectStatus
+  //validation code for Role
   @Value("${code.validation.role.alreadyExists}")
   private String roleAllreadyExists;
   @Value("${code.validation.role.notExists}")
   private String roleNotExists;
 
-  // message for ProjectStatus
+  // message for Role
   @Value("${message.validation.role.alreadyExists}")
   private String valdationRoleAllReadyExists;
   @Value("${message.validation.role.notExists}")
@@ -245,7 +245,7 @@ public class ValidationFailureResponseCode {
   //validation code for EMployee
   @Value("${code.validation.employee.notExists}")
   private String employeeNotExists;
-  @Value("${message.validation.email.alreadyExists}")
+  @Value("${code.validation.email.alreadyExists}")
   private String employeeEmailAllReadyExists;
   @Value("${code.validation.phonenumber.alreadyExists}")
   private String employeePhoneNumberAllReadyExists;

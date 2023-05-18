@@ -34,7 +34,7 @@ public class DefectTypeController {
         {
             return ResponseEntity.ok(new BaseResponse(RequestStatus.FAILURE.getStatus(),
                     validationFailureResponseCode.getDefectTypeAllreadyExists(),
-                    validationFailureResponseCode.getValidationSeviarityAlreadyExists()));
+                    validationFailureResponseCode.getValidationSeverityAlreadyExists()));
         }
         defectTypeService.saveDefectType(defectTypeRequest);
         return  ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(),
