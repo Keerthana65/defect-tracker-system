@@ -184,17 +184,6 @@ public class DefectController {
         return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.DEFECTS,defectService.multiSearchDefect(pageable,pagination,defectSearch),
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationDefectnSuccessMessage(),pagination));
     }
-    @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_DEFECT)
-    public ResponseEntity<Object> multiSearchDefectTypee(@RequestParam(name="page") int page,
-                                                        @RequestParam(name="size") int size,
-                                                        @RequestParam(name="direction") String direction,
-                                                        @RequestParam(name="sortField") String sortField,
-                                                        DefectSearch defectSearch)
-    {
-        Pageable pageable= PageRequest.of(page,size, Sort.Direction.valueOf(direction),sortField);
-        PaginatedContentResponse.Pagination pagination=new PaginatedContentResponse.Pagination(page,size,0,0l);
-        return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.DEFECTS,defectService.multiSearchDefect(pageable,pagination,defectSearch),
-                RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationDefectnSuccessMessage(),pagination));
-    }
+
 
 }
