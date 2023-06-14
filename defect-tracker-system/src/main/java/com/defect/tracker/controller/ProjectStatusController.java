@@ -10,16 +10,19 @@ import com.defect.tracker.search.dto.ProjectStatusSearch;
 import com.defect.tracker.service.ProjectStatusService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class ProjectStatusController {
     @Autowired
     private ProjectStatusService projectStatusService;
@@ -27,6 +30,7 @@ public class ProjectStatusController {
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
 
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.PROJECTSTATUS)
     public ResponseEntity<Object> saveProjectStatus(@RequestBody ProjectStatusRequest projectStatusRequest)
     {
@@ -40,7 +44,7 @@ public class ProjectStatusController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveProjectStatusSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(EndpointURI.PROJECTSTATUS)
     public ResponseEntity<Object> updateProjectStatus(@RequestBody ProjectStatusRequest projectStatusRequest)
     {
@@ -60,6 +64,7 @@ public class ProjectStatusController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getUpdateProjectStatusSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.PROJECTSTATUS)
     public ResponseEntity<Object> getAllProjectStatus() {
         return ResponseEntity.ok(new ContentResponse<>(Constants.PROJECTSTATUSES, projectStatusService.getAllProjectStatus(),
@@ -67,6 +72,7 @@ public class ProjectStatusController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllProjectStatusSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.PROJECTSTATUS_BY_ID)
     public ResponseEntity<Object> getProjectStatusById(@PathVariable Long id) {
         if (!projectStatusService.existByProjectStatus(id)) {
@@ -79,6 +85,7 @@ public class ProjectStatusController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetProjectStatusSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_PROJECTSTATUS)
     public ResponseEntity<Object> multiSearchPriority(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size,
@@ -93,6 +100,7 @@ public class ProjectStatusController {
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSearchAndAPginationProjectStatusSuccessMessage(),pagination));
     }
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(EndpointURI.PROJECTSTATUS_BY_ID)
     public ResponseEntity<Object> deleteProjectStatusByID(@PathVariable Long id)
     {

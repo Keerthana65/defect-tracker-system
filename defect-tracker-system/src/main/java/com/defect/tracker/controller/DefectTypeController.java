@@ -9,24 +9,27 @@ import com.defect.tracker.search.dto.DefectTypeSearch;
 import com.defect.tracker.service.DefectTypeService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.GeneratedValue;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class DefectTypeController {
     @Autowired
     private DefectTypeService defectTypeService;
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
-
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.DEFECTTYPE)
     public ResponseEntity<Object> createDefectType(@RequestBody DefectTypeRequest defectTypeRequest)
     {
@@ -41,7 +44,7 @@ public class DefectTypeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveDefectTypeSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(value = EndpointURI.DEFECTTYPE)
     public ResponseEntity<Object> updateDefectType(@RequestBody DefectTypeRequest defectTypeRequest)
     {
@@ -63,7 +66,7 @@ public class DefectTypeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getUpdateDefectTypeSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.DEFECTTYPE)
     public ResponseEntity<Object> getAllDefectType()
     {
@@ -72,7 +75,7 @@ public class DefectTypeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllDefectTypeSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.DEFECTTYPE_BY_ID)
     public ResponseEntity<Object> getDefectTypeById(@PathVariable Long id)
     {
@@ -87,6 +90,7 @@ public class DefectTypeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetDefectTypeSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_DEFECTTYPE)
     public ResponseEntity<Object> multiSearchDefectType(@RequestParam(name="page") int page,
                                                         @RequestParam(name="size") int size,
@@ -101,7 +105,7 @@ public class DefectTypeController {
     }
 
 
-
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(EndpointURI.DEFECTTYPE_BY_ID)
     public ResponseEntity<Object> deleteDefectTypeById(@PathVariable Long id)
     {

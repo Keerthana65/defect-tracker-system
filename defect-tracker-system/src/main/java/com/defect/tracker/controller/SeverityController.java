@@ -9,16 +9,19 @@ import com.defect.tracker.search.dto.SeveritySearch;
 import com.defect.tracker.service.SeverityService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class SeverityController {
 
     @Autowired
@@ -26,6 +29,7 @@ public class SeverityController {
 
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
+    @PreAuthorize(value = User.USERS)
     @PostMapping(value = EndpointURI.SEVERITY)
     public ResponseEntity<Object> saveSeverity(@RequestBody SeverityRequest seviarityRequest)
     {
@@ -46,7 +50,7 @@ public class SeverityController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveSeviaritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(value = EndpointURI.SEVERITY)
     public ResponseEntity<Object> getAllSeverity()
     {
@@ -54,7 +58,7 @@ public class SeverityController {
                 ,RequestStatus.SUCCESS.getStatus(),validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllSeviaritySuccessMessage() ));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(value = EndpointURI.SEVERITY_BY_ID)
     public ResponseEntity<Object> getSeverityById(@PathVariable Long id)
     {
@@ -67,7 +71,7 @@ public class SeverityController {
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetSeviaritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(value = EndpointURI.SEVERITY_BY_ID)
     public ResponseEntity<Object> deleteSeverity(@PathVariable Long id)
     {
@@ -82,7 +86,7 @@ public class SeverityController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getDeleteSeviaritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(value = EndpointURI.SEVERITY)
     public ResponseEntity<Object> updateSeverity(@RequestBody SeverityRequest seviarityRequest)
     {
@@ -108,6 +112,7 @@ public class SeverityController {
      return ResponseEntity.ok(new BaseResponse(RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
              validationFailureResponseCode.getUpdateSeviaritySuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_SEVIARITY)
     public ResponseEntity<Object> multiSearchSeviarity(@RequestParam(name="page") int page,
                                                         @RequestParam(name="size") int size,

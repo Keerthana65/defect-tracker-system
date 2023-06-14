@@ -7,7 +7,9 @@ public class EndpointURI {
   private static final String FEILD = "/{feild}";
   private static final String pageSize="/{pageSize}";
 
+
   private static final String pageNumber="/{pageNumber}";
+  public static final String CHANGE_PASSWORD = "/{password}";
 
   private static final String sortProperty="/{sortProperty}";
 

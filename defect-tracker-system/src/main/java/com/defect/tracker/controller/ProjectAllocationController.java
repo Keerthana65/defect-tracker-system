@@ -13,16 +13,19 @@ import com.defect.tracker.service.ProjectService;
 import com.defect.tracker.service.RoleService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class ProjectAllocationController {
     @Autowired
     private ProjectAllocationService projectAllocationService;
@@ -36,6 +39,7 @@ public class ProjectAllocationController {
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
 
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.PROJECTALLOCATION)
     public ResponseEntity<Object> saveProjectAllocation(@RequestBody ProjectAllocationRequest projectAllocationRequest)
     {
@@ -62,6 +66,7 @@ public class ProjectAllocationController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveProjectAllocationSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @PutMapping(EndpointURI.PROJECTALLOCATION)
     public ResponseEntity<Object> updateProjectAllocation(@RequestBody ProjectAllocationRequest projectAllocationRequest)
     {
@@ -95,6 +100,7 @@ public class ProjectAllocationController {
                 validationFailureResponseCode.getUpdateProjectAllocationSuccessMessage()));
 
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.PROJECTALLOCATION)
     public ResponseEntity<Object> getAllProjectAllocation()
     {
@@ -104,6 +110,7 @@ public class ProjectAllocationController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllProjectAllocationSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.PROJECTALLOCATION_BY_ID)
     public ResponseEntity<Object> getProjectAllocationById(@PathVariable Long id)
     {
@@ -118,6 +125,7 @@ public class ProjectAllocationController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetProjectAllocationSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_PROJECTALLOCATION)
     public ResponseEntity<Object> multiSearchProjectAllocation(@RequestParam(name="page") int page,
                                                                @RequestParam(name="size") int size,
@@ -131,6 +139,7 @@ public class ProjectAllocationController {
                 RequestStatus.SUCCESS.getStatus(),validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationProjectAllocationSuccessMessage(),pagination));
     }
 
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(EndpointURI.PROJECTALLOCATION_BY_ID)
     public ResponseEntity<Object> deleteProjectAllocation(@PathVariable Long id)
     {

@@ -9,18 +9,21 @@ import com.defect.tracker.search.dto.PrioritySearch;
 import com.defect.tracker.service.PriorityService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class PriorityController {
 
     @Autowired
@@ -29,6 +32,7 @@ public class PriorityController {
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
 
+    @PreAuthorize(value = User.USERS)
     @PostMapping(value = EndpointURI.PRIORITY)
     public ResponseEntity<Object> savePriority(@RequestBody PriorityRequest priorityRequest) {
         if (priorityService.isPriorityExistsByName(priorityRequest.getName())) {
@@ -46,14 +50,14 @@ public class PriorityController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSavePrioritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(value = EndpointURI.PRIORITY)
     public ResponseEntity<Object> getAllPriority() {
         return ResponseEntity.ok(new ContentResponse<>(Constants.PRIORITIES, priorityService.getAllPriority(),
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllPrioritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(value = EndpointURI.PRIORITY_BY_ID)
     public ResponseEntity<Object> getPriorityById(@PathVariable Long id) {
         if (!priorityService.existsByPriority(id)) {
@@ -67,7 +71,7 @@ public class PriorityController {
                 validationFailureResponseCode.getGetAllPrioritySuccessMessage()));
 
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(value = EndpointURI.PRIORITY)
     public ResponseEntity<Object> updatePriority(@RequestBody PriorityRequest priorityRequest) {
         if (!priorityService.existsByPriority(priorityRequest.getId())) {
@@ -90,7 +94,7 @@ public class PriorityController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getUpdatePrioritySuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(value = EndpointURI.PRIORITY_BY_ID)
     public ResponseEntity<Object> deletePriority(@PathVariable Long id) {
         if (!priorityService.existsByPriority(id)) {
@@ -104,7 +108,7 @@ public class PriorityController {
                 validationFailureResponseCode.getDeletePrioritySuccessMessage()));
     }
 
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.PRIORITYPAGINATION)
     public ResponseEntity<Object> multiSearchPriority(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size,

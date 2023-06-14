@@ -10,16 +10,20 @@ import com.defect.tracker.search.dto.RoleSearch;
 import com.defect.tracker.service.RoleService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class RoleController {
     @Autowired
     private RoleService roleService;
@@ -27,6 +31,7 @@ public class RoleController {
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
 
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.ROLE)
     public ResponseEntity<Object> saveRole(@RequestBody RoleRequest roleRequest) {
         if (roleService.isRoleExists(roleRequest.getName())) {
@@ -40,7 +45,7 @@ public class RoleController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveRoleSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(EndpointURI.ROLE)
     public ResponseEntity<Object> updateRole(@RequestBody RoleRequest roleRequest) {
         if (!roleService.existByRole(roleRequest.getId())) {
@@ -59,14 +64,14 @@ public class RoleController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getUpdateRoleSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.ROLE)
     public ResponseEntity<Object> getAllRole() {
         return ResponseEntity.ok(new ContentResponse<>(Constants.ROLES, roleService.getAllRoles(),
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetAllRoleSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.ROLE_BY_ID)
     public ResponseEntity<Object> getRoleById(@PathVariable Long id) {
         if (!roleService.existByRole(id)) {
@@ -80,7 +85,7 @@ public class RoleController {
                 validationFailureResponseCode.getGetRoleSuccessMessage()));
 
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_ROLE)
     public ResponseEntity<Object> multiSearchDefectType(@RequestParam(name="page") int page,
                                                         @RequestParam(name="size") int size,
@@ -93,7 +98,7 @@ public class RoleController {
         return ResponseEntity.ok(new PaginatedContentResponse<>(Constants.ROLES,roleService.multiSearchRole(pageable,pagination,roleSearch),
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),validationFailureResponseCode.getSearchAndPaginationRoleSuccessMessage(),pagination));
     }
-
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(EndpointURI.ROLE_BY_ID)
     public ResponseEntity<Object> deleteRole(@PathVariable Long id) {
         if (!roleService.existByRole(id)) {

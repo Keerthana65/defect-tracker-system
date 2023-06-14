@@ -12,6 +12,7 @@ import com.defect.tracker.service.DesignationService;
 import com.defect.tracker.service.EmployeeService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.aspectj.apache.bcel.classfile.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -33,6 +36,7 @@ public class EmployeeController {
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
 
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.EMPLOYEE)
     public ResponseEntity<Object> saveEmployee(@RequestBody EmployeeRequest employeeRequest) {
         if (employeeService.existsByEmployeeEmail(employeeRequest.getEmail())) {
@@ -55,7 +59,7 @@ public class EmployeeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveEmployeeSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @PutMapping(EndpointURI.EMPLOYEE)
     public ResponseEntity<Object> updateEmployee(@RequestBody EmployeeRequest employeeRequest) {
         if (!employeeService.existsById(employeeRequest.getId())) {
@@ -84,13 +88,13 @@ public class EmployeeController {
                 validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getSaveEmployeeSuccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.EMPLOYEE)
     public ResponseEntity<Object> getAllEmployee() {
         return ResponseEntity.ok(new ContentResponse<>(Constants.EMPLOYEES, employeeService.getAllEmployee(), RequestStatus.SUCCESS.getStatus(),
                 validationFailureResponseCode.getCommonSuccessCode(), validationFailureResponseCode.getGetAllEmployeeSUccessMessage()));
     }
-
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.EMPLOYEE_BY_ID)
     public ResponseEntity<Object> getEmployeeById(@PathVariable Long id) {
         if (!employeeService.existsById(id)) {
@@ -103,6 +107,7 @@ public class EmployeeController {
                 RequestStatus.SUCCESS.getStatus(), validationFailureResponseCode.getCommonSuccessCode(),
                 validationFailureResponseCode.getGetEmployeeByIdSuccessMessage()));
     }
+    @PreAuthorize(value = User.USERS)
     @DeleteMapping(EndpointURI.EMPLOYEE_BY_ID)
     public ResponseEntity<Object> deleteEmployee(@PathVariable Long id)
     {
@@ -122,6 +127,7 @@ public class EmployeeController {
 //    {
 //        return employeeService.getEmployeePagination(pageNumber,pageSize,sortproperty);
 //    }
+@PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.paginationAndSorting)
     public ResponseEntity<Object> employeePagination(@PathVariable Integer pageNumber,@PathVariable Integer pageSize,@PathVariable String sortproperty)
     {

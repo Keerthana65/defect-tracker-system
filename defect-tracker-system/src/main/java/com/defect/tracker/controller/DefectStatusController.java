@@ -10,22 +10,25 @@ import com.defect.tracker.search.dto.DefectTypeSearch;
 import com.defect.tracker.service.DefectStatusService;
 import com.defect.tracker.utils.Constants;
 import com.defect.tracker.utils.EndpointURI;
+import com.defect.tracker.utils.User;
 import com.defect.tracker.utils.ValidationFailureResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@PreAuthorize(value = User.ADMINN)
 public class DefectStatusController {
     @Autowired
     private DefectStatusService defectStatusService;
     @Autowired
     private ValidationFailureResponseCode validationFailureResponseCode;
-
+    @PreAuthorize(value = User.USERS)
     @PostMapping(EndpointURI.DEFECTSTATUS)
     public ResponseEntity<Object> saveDefectStatus(@RequestBody DefecetStatusRequest defecetStatusRequest) {
         if (defectStatusService.isDefectStatusExists(defecetStatusRequest.getName())) {
@@ -39,6 +42,7 @@ public class DefectStatusController {
                 validationFailureResponseCode.getSaveDefectStatusSuccessMessage()));
     }
 
+    @PreAuthorize(value = User.USERS)
     @PutMapping(EndpointURI.DEFECTSTATUS)
     public ResponseEntity<Object> updateDefectStatus(@RequestBody DefecetStatusRequest defecetStatusRequest) {
         if (!defectStatusService.existByDefectStatus(defecetStatusRequest.getId())) {
@@ -58,6 +62,7 @@ public class DefectStatusController {
 
     }
 
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.DEFECTSTATUS)
     public ResponseEntity<Object> getAllDefectStatus() {
         return ResponseEntity.ok(new ContentResponse<>(Constants.DEFECTSTATUSES, defectStatusService.getAllDefectStatus(),
@@ -65,6 +70,7 @@ public class DefectStatusController {
                 validationFailureResponseCode.getGetAllDefectStatusSuccessMessage()));
     }
 
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.DEFECTSTATUS_BY_ID)
     public ResponseEntity<Object> getDefectStatus(@PathVariable Long id) {
         if (!defectStatusService.existByDefectStatus(id)) {
@@ -77,6 +83,7 @@ public class DefectStatusController {
                 validationFailureResponseCode.getGetDefectStatusSuccessMessage()));
 
     }
+    @PreAuthorize(value = User.USERS)
     @GetMapping(EndpointURI.SEARCH_AND_PAGINATION_DEFECTSTATUS)
     public ResponseEntity<Object> multiSearchDefectType(@RequestParam(name="page") int page,
                                                         @RequestParam(name="size") int size,

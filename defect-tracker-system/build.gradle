@@ -23,7 +23,6 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -31,14 +30,19 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-	testImplementation 'org.springframework.security:spring-security-test'
-	//implementation 'com.google.code.findbugs:findbugs:3.0.1'
-	//implementation 'net.sourceforge.pmd:pmd-core:6.41.0'
-	//implementation 'com.puppycrawl.tools:checkstyle:8.42'
-	//implementation 'org.sonarsource.sonarlint:sonarlint-core:6.4.1'
-	//implementation 'org.owasp:dependency-check-gradle:6.1.6'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	testImplementation 'org.springframework.security:spring-security-test'
+
+
 	implementation group: 'com.querydsl', name: 'querydsl-apt', version: '5.0.0'
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '5.0.0'
+//
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//	implementation 'org.springframework.security:spring-security-config:5.5.0'
+//	implementation 'org.springframework.security:spring-security-web:5.5.0'
+//	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.0.RELEASE'
+
 }
 
 sourceSets {
